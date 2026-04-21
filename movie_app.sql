@@ -42,8 +42,7 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`id`, `title`, `year`, `rating`, `note`, `poster`, `created_at`) VALUES
-(1, 'Inception', '2010', 9, 'Great movie', 'test.jpg', '2026-04-19 14:56:20');
-
+(1, 'Inception', '2010', 9, 'Great movie', 'test.jpg');
 --
 -- Indexes for dumped tables
 --
