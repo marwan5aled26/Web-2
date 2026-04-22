@@ -52,7 +52,7 @@ function searchMovie(){
         }
     },
     error: function(xhr, status, error) {
-        console.log(xhr.responseText); // 🔥 shows real error
+        console.log(xhr.responseText); 
         alert('An error occurred while searching for the movie.');
     }
 });
