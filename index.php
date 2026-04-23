@@ -11,8 +11,8 @@
                     <path d="m21 21-4.35-4.35" />
                 </svg>
             </span>
-            <input type="text" id="searchInput" placeholder="Search for a movie..." autocomplete="off" onkeypress="if(event.key === 'Enter') searchMovie()" />
-            <button type="button" id="searchBtn" onclick="searchMovie()">Search</button>
+            <input type="text" id="searchInput" placeholder="Search for a movie..." autocomplete="off" />
+            <button id="searchBtn" onclick="searchMovie()">Search</button>
         </div>
         <p class="search-hint">Powered by OMDb API</p>
     </div>
@@ -46,6 +46,17 @@
         </div>
     </div>
 </section>
+
+<!-- ======================================================
+     Overlay
+====================================================== -->
+
+<div id="movieOverlay" class="modal-overlay hidden" onclick="closeOverlay(event)">
+    <div class="modal-content movie-detail-modal">
+        <button class="close-btn" onclick="this.closest('.modal-overlay').classList.add('hidden')">&times;</button>
+        <div id="overlayBody"></div>
+    </div>
+</div>
 
 <!-- ======================================================
      EDIT MODAL
@@ -103,6 +114,5 @@
 ====================================================== -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="API_Ops.js"></script>
-<script src="DB_Ops.js"></script>
 
 <?php include 'footer.php'; ?>
