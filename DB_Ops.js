@@ -5,6 +5,7 @@ function addToWatchlist(imdbId) {
     const title  = card.querySelector('.card-title').textContent.trim();
     const year   = card.querySelector('.card-year').textContent.replace('Year: ', '').trim();
     const poster = card.querySelector('.card-poster').src;
+    const id =imdbId;
 
     $.ajax({
         url: 'DB_Ops.php',
@@ -12,6 +13,7 @@ function addToWatchlist(imdbId) {
         dataType: 'json',
         data: {
             action: 'add',
+            id: id,
             title:  title,
             year:   year,
             rating: 0,
@@ -28,7 +30,7 @@ function addToWatchlist(imdbId) {
                 showToast(data.message, 'error');
             }
         },
-        error: function() {
+        error: function(data) {
             showToast('Failed to add movie.', 'error');
         }
     });
@@ -63,6 +65,8 @@ function loadWatchlist() {
                     if (!poster || poster === 'N/A') {
                         poster = 'https://via.placeholder.com/300x450?text=No+Image';
                     }
+                    const safeId = encodeURIComponent(String(movie.id));
+                    const safeNote = encodeURIComponent(movie.note || '');
                     const stars = movie.rating > 0
                         ? '★'.repeat(Math.round(movie.rating / 2)) + '☆'.repeat(5 - Math.round(movie.rating / 2))
                         : '';
@@ -83,8 +87,8 @@ function loadWatchlist() {
                                 ${movie.note ? `<p class="card-note">${movie.note}</p>` : ''}
                             </div>
                             <div class="card-actions">
-                                <button class="btn btn-edit" onclick="openModal(${movie.id}, ${movie.rating}, \`${movie.note}\`)">Edit</button>
-                                <button class="btn btn-delete" onclick="deleteMovie(${movie.id})">Delete</button>
+                                <button class="btn btn-edit" onclick="openModal('${safeId}', ${movie.rating || 0}, '${safeNote}')">Edit</button>
+                                <button class="btn btn-delete" onclick="deleteMovie('${safeId}')">Delete</button>
                             </div>
                         </div>`;
                 });

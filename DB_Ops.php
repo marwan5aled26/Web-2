@@ -35,14 +35,13 @@ $action = trim($_POST['action']);
 //  ADD MOVIE
 // ============================================================
 if ($action === 'add') {
-
     // --- Server-Side Validation ---
     $title  = isset($_POST['title'])  ? trim($_POST['title'])  : '';
     $year   = isset($_POST['year'])   ? trim($_POST['year'])   : '';
     $rating = isset($_POST['rating']) ? trim($_POST['rating']) : '';
     $note   = isset($_POST['note'])   ? trim($_POST['note'])   : '';
     $poster = isset($_POST['poster']) ? trim($_POST['poster']) : '';
-
+    $id     = isset($_POST['id'])     ? trim($_POST['id'])     : '';
     if (empty($title)) {
         echo json_encode(["status" => "error", "message" => "Title is required"]);
         exit();
@@ -59,10 +58,10 @@ if ($action === 'add') {
     }
 
     $rating = ($rating === '') ? 0 : (float) $rating;
-
+    $id=(string) $id;
     // --- Insert ---
-     $check = mysqli_prepare($conn, "SELECT id FROM movies WHERE title = ?");
-   mysqli_stmt_bind_param($check, "s", $title);
+     $check = mysqli_prepare($conn, "SELECT id FROM movies WHERE id = ?");
+   mysqli_stmt_bind_param($check, "s", $id);
    mysqli_stmt_execute($check);
    mysqli_stmt_store_result($check);
 
@@ -71,11 +70,11 @@ if (mysqli_stmt_num_rows($check) > 0) {
     mysqli_stmt_close($check);
     exit();
 }
-mysqli_stmt_close($check);
 
-    $sql  = "INSERT INTO movies (title, year, rating, note, poster) VALUES (?, ?, ?, ?, ?)";
+mysqli_stmt_close($check);
+    $sql  = "INSERT INTO movies (id, title, year, rating, note, poster) VALUES (?,?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ssdss", $title, $year, $rating, $note, $poster);
+    mysqli_stmt_bind_param($stmt, "sssdss", $id, $title, $year, $rating, $note, $poster);
 
     if (mysqli_stmt_execute($stmt)) {
         echo json_encode([
@@ -128,23 +127,28 @@ if ($action === 'get') {
 // ============================================================
 if ($action === 'delete') {
 
-    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+    $id = isset($_POST['id']) ? trim($_POST['id']) : '';
 
-    if ($id <= 0) {
+    if ($id === '') {
         echo json_encode(["status" => "error", "message" => "Invalid movie ID"]);
         exit();
     }
 
+
+
     $sql  = "DELETE FROM movies WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_bind_param($stmt, "s", $id);
 
     if (mysqli_stmt_execute($stmt)) {
-        echo json_encode(["status" => "success", "message" => "Movie deleted"]);
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo json_encode(["status" => "success", "message" => "Movie deleted"]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Movie not found"]);
+        }
     } else {
         echo json_encode(["status" => "error", "message" => mysqli_error($conn)]);
     }
-
     mysqli_stmt_close($stmt);
     exit();
 }
@@ -155,12 +159,12 @@ if ($action === 'delete') {
 // ============================================================
 if ($action === 'update') {
 
-    $id     = isset($_POST['id'])     ? (int)   $_POST['id']       : 0;
+    $id     = isset($_POST['id'])     ? trim($_POST['id'])          : '';
     $rating = isset($_POST['rating']) ? (float) $_POST['rating']   : 0;
     $note   = isset($_POST['note'])   ? trim($_POST['note'])        : '';
 
     // --- Validation ---
-    if ($id <= 0) {
+    if ($id === '') {
         echo json_encode(["status" => "error", "message" => "Invalid movie ID"]);
         exit();
     }
@@ -174,10 +178,14 @@ if ($action === 'update') {
     // UPDATE بس rating و note
     $sql = "UPDATE movies SET rating = ?, note = ? WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "dsi", $rating, $note, $id);
+    mysqli_stmt_bind_param($stmt, "dss", $rating, $note, $id);
 
     if (mysqli_stmt_execute($stmt)) {
-        echo json_encode(["status" => "success", "message" => "Movie updated"]);
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            echo json_encode(["status" => "success", "message" => "Movie updated"]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Movie not found or no changes made"]);
+        }
     } else {
         echo json_encode(["status" => "error", "message" => mysqli_error($conn)]);
     }
