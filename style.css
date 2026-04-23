@@ -562,3 +562,102 @@ body {
 
     .toast { left: 1rem; right: 1rem; max-width: none; }
 }
+
+
+.movie-detail-modal {
+    max-width: 900px !important;
+    width: 95%;
+    padding: 30px !important;
+    background: #1c2230 !important;
+    border: 1px solid rgba(88, 166, 255, 0.3) !important;
+}
+
+.overlay-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    color: #e6edf3;
+    text-align: left;
+}
+
+.overlay-poster img {
+    width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.overlay-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.overlay-title {
+    font-size: 2.2rem;
+    color: #58a6ff;
+    margin-bottom: 10px;
+}
+
+.year-span {
+    color: #8b949e;
+    font-weight: normal;
+}
+
+.overlay-meta {
+    margin-bottom: 25px;
+    color: #8b949e;
+    font-size: 0.95rem;
+}
+
+.section-label {
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    color: #8b949e;
+    margin-bottom: 10px;
+}
+
+.actors-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.actor-chip {
+    display: inline-flex;
+    align-items: center;
+    background: #21262d;
+    border: 1px solid #30363d;
+    padding: 6px 14px;
+    border-radius: 25px;
+    transition: 0.2s;
+}
+
+.actor-chip:hover {
+    border-color: #58a6ff;
+}
+
+.actor-avatar {
+    width: 24px;
+    height: 24px;
+    background: #58a6ff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.plot-text {
+    line-height: 1.6;
+    color: #c9d1d9;
+}
+
+@media (max-width: 768px) {
+    .overlay-container { justify-content: center; text-align: center; }
+    .overlay-poster img { width: 200px; }
+    .actors-grid { justify-content: center; }
+}
