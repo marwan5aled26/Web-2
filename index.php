@@ -11,8 +11,8 @@
                     <path d="m21 21-4.35-4.35" />
                 </svg>
             </span>
-            <input type="text" id="searchInput" placeholder="Search for a movie..." autocomplete="off" />
-            <button id="searchBtn" onclick="searchMovie()">Search</button>
+            <input type="text" id="searchInput" placeholder="Search for a movie..." autocomplete="off" onkeypress="if(event.key === 'Enter') searchMovie()" />
+            <button type="button" id="searchBtn" onclick="searchMovie()">Search</button>
         </div>
         <p class="search-hint">Powered by OMDb API</p>
     </div>
