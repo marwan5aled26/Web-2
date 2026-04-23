@@ -3,7 +3,7 @@ CREATE DATABASE movie_app;
 
 -- Run SQL Query in movie_app DB
 CREATE TABLE movies (
-  id varchar(10) PRIMARY KEY,
+  id varchar(20) PRIMARY KEY,
   title varchar(255) NOT NULL,
   year year(4) DEFAULT NULL,
   rating float DEFAULT NULL,
