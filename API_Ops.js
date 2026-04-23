@@ -1,6 +1,7 @@
 
 
 function searchMovie(){
+    window.location.hash = '';
     const searchInput = document.getElementById('searchInput');
     const query = searchInput.value.trim();
     if (query === '') {
@@ -39,13 +40,15 @@ function searchMovie(){
                         <p class="card-year">Year: ${movie.year}</p>
                         <p class="card-rating">Rating: ${movie.detailed ? movie.detailed.imdbRating : 'N/A'}</p>
                         <p class="card-note">Plot: ${movie.detailed ? movie.detailed.Plot : 'No plot available.'}</p>
-                        <button class="btn-add" onclick="addToWatchlist('${movie.id}')"><p class= "card-actions">Add to Watchlist</p></button>
+                        <button class="btn-add" id="btn-${movie.id}" onclick="addToWatchlist('${movie.id}')"><p class= "card-actions">Add to Watchlist</p></button>
                     </div>
                 </div>
             `;
         });
             document.getElementById('results').innerHTML = resultsHTML;
             document.getElementById('resultsSection').style.display = 'block';
+            sessionStorage.setItem('lastResults', resultsHTML); 
+            sessionStorage.setItem('lastQuery', query);
 
         } else {
             alert(data.message);
