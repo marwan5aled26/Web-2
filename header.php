@@ -10,12 +10,43 @@
 
 <header class="site-header">
     <div class="container header-inner">
+
         <div class="logo">
-            <span class="logo-icon">🎬</span>
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 6H20V18H4V6Z" 
+                          stroke="currentColor" 
+                          stroke-width="2" 
+                          stroke-linejoin="round"/>
+                    <path d="M8 6V18" 
+                          stroke="currentColor" 
+                          stroke-width="2"/>
+                    <path d="M16 6V18" 
+                          stroke="currentColor" 
+                          stroke-width="2"/>
+                    <path d="M4 10H8" 
+                          stroke="currentColor" 
+                          stroke-width="2"/>
+                    <path d="M4 14H8" 
+                          stroke="currentColor" 
+                          stroke-width="2"/>
+                    <path d="M16 10H20" 
+                          stroke="currentColor" 
+                          stroke-width="2"/>
+                    <path d="M16 14H20" 
+                          stroke="currentColor" 
+                          stroke-width="2"/>
+                </svg>
+            </div>
+
             <span class="logo-text">MovieTracker</span>
         </div>
+
         <nav class="header-nav">
-            <span class="nav-label">IS333 Assignment 1</span>
+            <button class="nav-watchlist-btn" onclick="scrollToWatchlist()">
+                My Watchlist
+            </button>
         </nav>
+
     </div>
 </header>

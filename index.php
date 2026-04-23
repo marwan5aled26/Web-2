@@ -31,8 +31,8 @@
 </section>
 
 <!-- MY WATCHLIST -->
-<section class="mylist-section">
-    <div class="container">
+<section id="myListSection" class="mylist-section">
+        <div class="container">
         <h2 class="section-title">
             <span class="title-icon">🎬</span>
             My Watchlist
