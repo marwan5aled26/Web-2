@@ -74,8 +74,8 @@ function searchMovie() {
           const buttonText = alreadyAdded ? "Added" : "Add to Watchlist";
 
           resultsHTML += `
-    <div class="card">
-        <div class="card-poster-wrap">
+    <div class="card" >
+        <div class="card-poster-wrap" onclick="showMovieDetails('${movie.id}')" style="cursor:pointer" >
             <img src="${poster}" 
                  alt="${movie.title}" 
                  class="card-poster"

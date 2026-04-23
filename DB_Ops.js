@@ -1,27 +1,17 @@
-function togglePlot(id, button, type = "plot") {
-  const element = document.getElementById(`${type}-${id}`);
 
-  if (element.style.webkitLineClamp === "unset") {
-    element.style.webkitLineClamp = "2";
-    button.innerText = "Show More";
-  } else {
-    element.style.webkitLineClamp = "unset";
-    button.innerText = "Show Less";
-  }
-}
 function addToWatchlist(imdbId) {
   const btn = event.currentTarget;
   const card = btn.closest(".card");
   const title = card.querySelector(".card-title").textContent.trim();
 
   const yearElement =
-    card.querySelector(".movie-year") || card.querySelector(".card-year");
+  card.querySelector(".movie-year") || card.querySelector(".card-year");
 
   const year = yearElement.textContent.replace("Year:", "").trim();
 
   const poster = card.querySelector(".card-poster").src;
+  console.log("Adding to watchlist:", { imdbId, title, year, poster });
 
-  console.log("Adding to watchlist:", { title, year, poster });
     const id =imdbId;
 
   $.ajax({
@@ -30,8 +20,7 @@ function addToWatchlist(imdbId) {
     dataType: "json",
     data: {
       action: "add",
-     id: id,
-
+      id: id,
       title: title,
       year: year,
       rating: 0,
@@ -52,6 +41,17 @@ function addToWatchlist(imdbId) {
       showToast("Failed to add movie.", "error");
     },
   });
+}
+function togglePlot(id, button, type = "plot") {
+  const element = document.getElementById(`${type}-${id}`);
+
+  if (element.style.webkitLineClamp === "unset") {
+    element.style.webkitLineClamp = "2";
+    button.innerText = "Show More";
+  } else {
+    element.style.webkitLineClamp = "unset";
+    button.innerText = "Show Less";
+  }
 }
 // ── Load Watchlist ───────────────────────────────────────
 function loadWatchlist() {

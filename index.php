@@ -114,5 +114,6 @@
 ====================================================== -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="API_Ops.js"></script>
+<script src="DB_Ops.js"></script>
 
 <?php include 'footer.php'; ?>
