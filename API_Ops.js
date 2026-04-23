@@ -1,6 +1,7 @@
-let globalMoviesData = []; 
 
-function searchMovie(){
+let globalMoviesData = [];
+
+function searchMovie() {
     const searchInput = document.getElementById('searchInput');
     const query = searchInput.value.trim();
     if (query === '') {
@@ -11,28 +12,35 @@ function searchMovie(){
     $.ajax({
         url: 'API_Ops.php',
         method: 'POST',
-        dataType: 'json', 
+        dataType: 'json',
         data: { action: 'search', query: query },
-        success: function(data) {
+        success: function (data) {
             if (data.status === 'success') {
-                globalMoviesData = data.movies; 
+                globalMoviesData = data.movies;
                 let resultsHTML = '';
 
                 data.movies.forEach(movie => {
                     let poster = (movie.poster === "N/A" || !movie.poster) ? "https://via.placeholder.com/300x450?text=No+Image" : movie.poster;
-
                     resultsHTML += `
-                        <div class="card" onclick="showMovieDetails('${movie.id}')" style="cursor:pointer">
-                            <img src="${poster}" alt="${movie.title}" class="card-poster">
-                            <div class="movie-info">
-                                <h3 class="card-title">${movie.title}</h3>
-                                <p class="card-year">Year: ${movie.year}</p>
-                                <button class="btn-add" onclick="event.stopPropagation(); addToWatchlist('${movie.id}')">
-                                    <p class="card-actions">Add to Watchlist</p>
-                                </button>
-                            </div>
-                        </div>
-                    `;
+                      <div class="card" onclick="showMovieDetails('${movie.id}')" style="cursor:pointer">
+                      <img src="${poster}" 
+                          alt="${movie.title} Poster" 
+                          class="card-poster"
+                          onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
+                      
+                      <div class="movie-info">
+                          <h3 class="card-title">${movie.title} </h3>
+                          <p class="card-year">Year: ${movie.year}</p>
+                          <p class="card-rating">Rating: ${movie.detailed ? movie.detailed.imdbRating : 'N/A'}</p>
+                          <p class="card-note">Plot: ${movie.detailed ? movie.detailed.Plot : 'No plot available.'}</p>
+                          
+                          <button class="btn-add" onclick="event.stopPropagation(); addToWatchlist('${movie.id}')">
+                              <p class="card-actions">Add to Watchlist</p>
+                          </button>
+                      </div>
+                   </div>
+                   `;
+                   
                 });
                 document.getElementById('results').innerHTML = resultsHTML;
                 document.getElementById('resultsSection').style.display = 'block';
@@ -43,14 +51,20 @@ function searchMovie(){
         }
     });
 }
+function closeOverlay(event) {
+
+    if (event.target === event.currentTarget) {
+        event.currentTarget.classList.add('hidden');
+    }
+}
 
 function showMovieDetails(id) {
     const movie = globalMoviesData.find(m => m.id === id);
     if (!movie || !movie.detailed) return;
 
     const d = movie.detailed;
+
     
-  
     const actorsList = d.Actors.split(',').map(actor => `
         <div class="actor-chip">
             <div class="actor-avatar">${actor.trim().charAt(0)}</div>
@@ -88,5 +102,4 @@ function showMovieDetails(id) {
 
     document.getElementById('movieOverlay').classList.remove('hidden');
 }
-
 
