@@ -1,3 +1,5 @@
+let globalMoviesData = [];
+
 function togglePlot(movieId, button) {
   const plot = document.getElementById(`plot-${movieId}`);
 
@@ -50,6 +52,7 @@ function searchMovie() {
     },
     success: function (data) {
       if (data.status === "success") {
+        globalMoviesData = data.movies;
         let resultsHTML = "";
 
     
@@ -149,3 +152,55 @@ ${
     },
   });
 }
+function closeOverlay(event) {
+
+    if (event.target === event.currentTarget) {
+        event.currentTarget.classList.add('hidden');
+    }
+}
+
+function showMovieDetails(id) {
+    const movie = globalMoviesData.find(m => m.id === id);
+    if (!movie || !movie.detailed) return;
+
+    const d = movie.detailed;
+
+    
+    const actorsList = d.Actors.split(',').map(actor => `
+        <div class="actor-chip">
+            <div class="actor-avatar">${actor.trim().charAt(0)}</div>
+            <span>${actor.trim()}</span>
+        </div>
+    `).join('');
+
+    document.getElementById('overlayBody').innerHTML = `
+        <div class="overlay-container">
+            <div class="overlay-poster">
+                <img src="${movie.poster !== 'N/A' ? movie.poster : 'https://via.placeholder.com/300x450?text=No+Image'}" />
+            </div>
+            <div class="overlay-info">
+                <h2 class="overlay-title">${movie.title} <span class="year-span">(${movie.year})</span></h2>
+                <div class="overlay-meta">
+                    <span>🎬 ${d.Genre}</span> • <span>⏳ ${d.Runtime}</span> • <span>⭐ ${d.imdbRating}</span>
+                </div>
+                
+                <div class="actors-section">
+                    <p class="section-label">CAST</p>
+                    <div class="actors-grid">${actorsList}</div>
+                </div>
+
+                <div class="plot-section">
+                    <p class="section-label">PLOT</p>
+                    <p class="plot-text">${d.Plot}</p>
+                </div>
+
+                <button class="btn btn-primary" onclick="addToWatchlist('${movie.id}')" style="margin-top:20px; width:auto; padding:10px 25px;">
+                    + Add to Watchlist
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('movieOverlay').classList.remove('hidden');
+}
+
