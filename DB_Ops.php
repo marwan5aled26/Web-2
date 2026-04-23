@@ -62,9 +62,17 @@ if ($action === 'add') {
 
     // --- Insert ---
      $check = mysqli_prepare($conn, "SELECT id FROM movies WHERE title = ?");
-     mysqli_stmt_bind_param($check, "s", $title);
-     mysqli_stmt_execute($check);
-     mysqli_stmt_store_result($check);
+   mysqli_stmt_bind_param($check, "s", $title);
+   mysqli_stmt_execute($check);
+   mysqli_stmt_store_result($check);
+
+if (mysqli_stmt_num_rows($check) > 0) {
+    echo json_encode(["status" => "error", "message" => "Movie already in watchlist!"]);
+    mysqli_stmt_close($check);
+    exit();
+}
+mysqli_stmt_close($check);
+
     $sql  = "INSERT INTO movies (title, year, rating, note, poster) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "ssdss", $title, $year, $rating, $note, $poster);
