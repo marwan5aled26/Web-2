@@ -61,6 +61,10 @@ if ($action === 'add') {
     $rating = ($rating === '') ? 0 : (float) $rating;
 
     // --- Insert ---
+     $check = mysqli_prepare($conn, "SELECT id FROM movies WHERE title = ?");
+     mysqli_stmt_bind_param($check, "s", $title);
+     mysqli_stmt_execute($check);
+     mysqli_stmt_store_result($check);
     $sql  = "INSERT INTO movies (title, year, rating, note, poster) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "ssdss", $title, $year, $rating, $note, $poster);
