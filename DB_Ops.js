@@ -171,7 +171,11 @@ function showToast(message, type = 'info') {
 // ── Char counter for note textarea ───────────────────────
 document.addEventListener('DOMContentLoaded', function () {
     loadWatchlist();
-    document.getElementById('editNote').addEventListener('input', function () {
+    const lastResults = sessionStorage.getItem('lastResults');
+     if (lastResults) {
+        document.getElementById('results').innerHTML = lastResults;
+        document.getElementById('resultsSection').style.display = 'block';}
+        document.getElementById('editNote').addEventListener('input', function () {
         document.getElementById('charCount').textContent = this.value.length + ' / 500';
     });
 });
