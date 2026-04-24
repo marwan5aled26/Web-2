@@ -1,6 +1,8 @@
 <?php
 header('Content-Type: application/json');
 
+/* CURL REQUEST HANDLER */
+
 function callAPI($method, $url, $data = false)
 {
     $curl = curl_init();
@@ -23,13 +25,13 @@ function callAPI($method, $url, $data = false)
 
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
     $result = curl_exec($curl);
-
     curl_close($curl);
 
     return $result;
 }
+
+/* SEARCH API ENDPOINT */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = trim($_POST['action']);
@@ -45,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             exit();
         }
 
-        $apiKey = 'daeab9a1';
+        $apiKey = '4f74784e';
         $url = 'https://www.omdbapi.com/?' . http_build_query([
             'apikey' => $apiKey,
             's' => $query,
@@ -73,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
 
         if ($data['Response'] === 'True') {
-
             $movies = [];
 
             foreach ($data['Search'] as $movie) {
@@ -106,7 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 'status' => 'success',
                 'movies' => $movies
             ]);
-
         } else {
             echo json_encode([
                 'status' => 'error',
@@ -128,3 +128,4 @@ echo json_encode([
     'message' => 'Invalid request'
 ]);
 exit();
+?>

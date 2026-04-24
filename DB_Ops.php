@@ -1,20 +1,18 @@
 <?php
-
-
-
 header('Content-Type: application/json');
 
-// 🔗 Database Connection
-$host     = "localhost";
+/* DATABASE CONNECTION */
+
+$host = "localhost";
 $username = "root";
 $password = "";
-$db_name  = "movie_app";
+$db_name = "movie_app";
 
 $conn = mysqli_connect($host, $username, $password, $db_name);
 
 if (!$conn) {
     echo json_encode([
-        "status"  => "error",
+        "status" => "error",
         "message" => "Connection failed: " . mysqli_connect_error()
     ]);
     exit();
@@ -22,7 +20,7 @@ if (!$conn) {
 
 if (!isset($_POST['action'])) {
     echo json_encode([
-        "status"  => "error",
+        "status" => "error",
         "message" => "No action provided"
     ]);
     exit();
@@ -30,25 +28,39 @@ if (!isset($_POST['action'])) {
 
 $action = trim($_POST['action']);
 
+/* ADD MOVIE */
 
-// ============================================================
-//  ADD MOVIE
-// ============================================================
 if ($action === 'add') {
-    // --- Server-Side Validation ---
-    $title  = isset($_POST['title'])  ? trim($_POST['title'])  : '';
-    $year   = isset($_POST['year'])   ? trim($_POST['year'])   : '';
+    $id = isset($_POST['id']) ? trim($_POST['id']) : '';
+    $title = isset($_POST['title']) ? trim($_POST['title']) : '';
+    $year = isset($_POST['year']) ? trim($_POST['year']) : '';
     $rating = isset($_POST['rating']) ? trim($_POST['rating']) : '';
-    $note   = isset($_POST['note'])   ? trim($_POST['note'])   : '';
+    $note = isset($_POST['note']) ? trim($_POST['note']) : '';
     $poster = isset($_POST['poster']) ? trim($_POST['poster']) : '';
-    $id     = isset($_POST['id'])     ? trim($_POST['id'])     : '';
+
+    if (empty($id)) {
+        echo json_encode(["status" => "error", "message" => "ID is required"]);
+        exit();
+    }
+
+    if (!preg_match('/^[0-9]+$/', $id) && !preg_match('/^tt[0-9]+$/', $id)) {
+        echo json_encode(["status" => "error", "message" => "ID must contain only numbers or start with 'tt'"]);
+        exit();
+    }
+
     if (empty($title)) {
         echo json_encode(["status" => "error", "message" => "Title is required"]);
         exit();
     }
 
     if (empty($year) || !preg_match('/^\d{4}$/', $year)) {
-        echo json_encode(["status" => "error", "message" => "Valid year is required (e.g. 2024)"]);
+        echo json_encode(["status" => "error", "message" => "Valid year is required (e.g., 2024)"]);
+        exit();
+    }
+
+    $currentYear = date('Y');
+    if ($year < 1900 || $year > $currentYear + 1) {
+        echo json_encode(["status" => "error", "message" => "Year must be between 1900 and " . ($currentYear + 1)]);
         exit();
     }
 
@@ -58,21 +70,24 @@ if ($action === 'add') {
     }
 
     $rating = ($rating === '') ? 0 : (float) $rating;
-    $id=(string) $id;
-    // --- Insert ---
-     $check = mysqli_prepare($conn, "SELECT id FROM movies WHERE id = ?");
-   mysqli_stmt_bind_param($check, "s", $id);
-   mysqli_stmt_execute($check);
-   mysqli_stmt_store_result($check);
 
-if (mysqli_stmt_num_rows($check) > 0) {
-    echo json_encode(["status" => "error", "message" => "Movie already in watchlist!"]);
+    if (empty($poster)) {
+        $poster = 'https://via.placeholder.com/300x450?text=No+Poster';
+    }
+
+    $check = mysqli_prepare($conn, "SELECT id FROM movies WHERE id = ?");
+    mysqli_stmt_bind_param($check, "s", $id);
+    mysqli_stmt_execute($check);
+    mysqli_stmt_store_result($check);
+
+    if (mysqli_stmt_num_rows($check) > 0) {
+        echo json_encode(["status" => "error", "message" => "Movie ID already exists in watchlist!"]);
+        mysqli_stmt_close($check);
+        exit();
+    }
     mysqli_stmt_close($check);
-    exit();
-}
 
-mysqli_stmt_close($check);
-    $sql  = "INSERT INTO movies (id, title, year, rating, note, poster) VALUES (?,?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO movies (id, title, year, rating, note, poster) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "sssdss", $id, $title, $year, $rating, $note, $poster);
 
@@ -80,7 +95,7 @@ mysqli_stmt_close($check);
         echo json_encode([
             "status" => "success",
             "message" => "Movie added successfully",
-            "id" => mysqli_insert_id($conn)
+            "id" => $id
         ]);
     } else {
         echo json_encode(["status" => "error", "message" => mysqli_error($conn)]);
@@ -90,13 +105,10 @@ mysqli_stmt_close($check);
     exit();
 }
 
+/* GET MOVIES */
 
-// ============================================================
-//  GET MOVIES
-// ============================================================
 if ($action === 'get') {
-
-    $sql    = "SELECT * FROM movies ORDER BY id DESC";
+    $sql = "SELECT * FROM movies ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
@@ -106,13 +118,12 @@ if ($action === 'get') {
 
     $movies = [];
     while ($row = mysqli_fetch_assoc($result)) {
-        // Escape output to prevent XSS
         $movies[] = [
-            "id"     => $row['id'],
-            "title"  => htmlspecialchars($row['title'],  ENT_QUOTES, 'UTF-8'),
-            "year"   => htmlspecialchars($row['year'],   ENT_QUOTES, 'UTF-8'),
+            "id" => $row['id'],
+            "title" => htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'),
+            "year" => htmlspecialchars($row['year'], ENT_QUOTES, 'UTF-8'),
             "rating" => $row['rating'],
-            "note"   => htmlspecialchars($row['note'],   ENT_QUOTES, 'UTF-8'),
+            "note" => htmlspecialchars($row['note'], ENT_QUOTES, 'UTF-8'),
             "poster" => htmlspecialchars($row['poster'], ENT_QUOTES, 'UTF-8'),
         ];
     }
@@ -121,12 +132,9 @@ if ($action === 'get') {
     exit();
 }
 
+/* DELETE MOVIE */
 
-// ============================================================
-//  DELETE MOVIE
-// ============================================================
 if ($action === 'delete') {
-
     $id = isset($_POST['id']) ? trim($_POST['id']) : '';
 
     if ($id === '') {
@@ -134,9 +142,7 @@ if ($action === 'delete') {
         exit();
     }
 
-
-
-    $sql  = "DELETE FROM movies WHERE id = ?";
+    $sql = "DELETE FROM movies WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "s", $id);
 
@@ -153,17 +159,13 @@ if ($action === 'delete') {
     exit();
 }
 
+/* UPDATE MOVIE */
 
-// ============================================================
-// UPDATE MOVIE (rating + note only)
-// ============================================================
 if ($action === 'update') {
+    $id = isset($_POST['id']) ? trim($_POST['id']) : '';
+    $rating = isset($_POST['rating']) ? (float) $_POST['rating'] : 0;
+    $note = isset($_POST['note']) ? trim($_POST['note']) : '';
 
-    $id     = isset($_POST['id'])     ? trim($_POST['id'])          : '';
-    $rating = isset($_POST['rating']) ? (float) $_POST['rating']   : 0;
-    $note   = isset($_POST['note'])   ? trim($_POST['note'])        : '';
-
-    // --- Validation ---
     if ($id === '') {
         echo json_encode(["status" => "error", "message" => "Invalid movie ID"]);
         exit();
@@ -174,8 +176,6 @@ if ($action === 'update') {
         exit();
     }
 
-    // --- Update ---
-    // UPDATE بس rating و note
     $sql = "UPDATE movies SET rating = ?, note = ? WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "dss", $rating, $note, $id);
@@ -194,10 +194,6 @@ if ($action === 'update') {
     exit();
 }
 
-
-// ============================================================
-// Unknown Action
-// ============================================================
 echo json_encode(["status" => "error", "message" => "Unknown action"]);
 exit();
 ?>

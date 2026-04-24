@@ -1,3 +1,7 @@
+<!-- ======================================================
+     FOOTER SECTION
+====================================================== -->
+
 <footer class="site-footer">
     <div class="container footer-inner">
         <p class="footer-text">
