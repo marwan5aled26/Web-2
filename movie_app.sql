@@ -5,7 +5,7 @@ CREATE DATABASE movie_app;
 CREATE TABLE movies (
   id varchar(20) PRIMARY KEY,
   title varchar(255) NOT NULL,
-  year year(4) DEFAULT NULL,
+  year varchar(10) DEFAULT NULL,
   rating float DEFAULT NULL,
   note text DEFAULT NULL,
   poster varchar(255) DEFAULT NULL,
