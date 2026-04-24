@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 class UploadHandler {
-    private $uploadDir = 'uploads/posters/';
+    private $uploadDir = 'posters/';
     private $maxFileSize = 5242880; // 5MB
     private $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
     private $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
@@ -55,7 +55,6 @@ class UploadHandler {
         // Validate file type using finfo (more secure)
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mimeType = finfo_file($finfo, $file['tmp_name']);
-        finfo_close($finfo);
         
         if (!in_array($mimeType, $this->allowedTypes)) {
             return [
@@ -91,7 +90,7 @@ class UploadHandler {
             chmod($filepath, 0644);
             
             // Return web-accessible path
-            $webPath = 'uploads/posters/' . $filename;
+            $webPath = 'posters/' . $filename;
             
             return [
                 'success' => true,

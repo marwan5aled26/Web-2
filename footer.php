@@ -1,6 +1,4 @@
-<!-- ======================================================
-    FOOTER SECTION
-====================================================== -->
+<!-- FOOTER SECTION -->
 
 <footer class="site-footer">
     <div class="container footer-inner">

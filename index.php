@@ -1,8 +1,6 @@
 <?php include 'header.php'; ?>
 
-<!-- ======================================================
-    SEARCH SECTION
-====================================================== -->
+<!-- SEARCH SECTION -->
 <section class="search-section">
     <div class="search-wrapper">
         <div class="search-bar">
@@ -19,9 +17,7 @@
     </div>
 </section>
 
-<!-- ======================================================
-    SEARCH RESULTS SECTION
-====================================================== -->
+<!-- SEARCH RESULTS SECTION -->
 <section class="results-section" id="resultsSection" style="display:none;">
     <div class="container">
         <h2 class="section-title">
@@ -33,9 +29,7 @@
     </div>
 </section>
 
-<!-- ======================================================
-    MY WATCHLIST SECTION
-====================================================== -->
+<!-- MY WATCHLIST SECTION -->
 <section id="myListSection" class="mylist-section">
     <div class="container">
         <h2 class="section-title">
@@ -52,9 +46,7 @@
     </div>
 </section>
 
-<!-- ======================================================
-    MOVIE DETAILS OVERLAY
-====================================================== -->
+<!-- MOVIE DETAILS OVERLAY -->
 <div id="movieOverlay" class="modal-overlay hidden" onclick="closeOverlay(event)">
     <div class="modal-content movie-detail-modal">
         <button class="close-btn" onclick="this.closest('.modal-overlay').classList.add('hidden')">&times;</button>
@@ -62,9 +54,7 @@
     </div>
 </div>
 
-<!-- ======================================================
-    EDIT MOVIE MODAL
-====================================================== -->
+<!-- EDIT MOVIE MODAL -->
 <div id="modalOverlay" class="modal-overlay hidden" onclick="closeModal(event)">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
 
@@ -104,9 +94,7 @@
     </div>
 </div>
 
-<!-- ======================================================
-    ADD MOVIE MODAL
-====================================================== -->
+<!-- ADD MOVIE MODAL -->
 <div id="addMovieOverlay" class="modal-overlay hidden" onclick="closeAddMovieModal(event)">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="addMovieTitle">
 
@@ -201,21 +189,15 @@
     </div>
 </div>
 
-<!-- ======================================================
-    TOAST NOTIFICATION
-====================================================== -->
+<!-- TOAST NOTIFICATION -->
 <div id="toast" class="toast" role="alert" aria-live="polite"></div>
 
-<!-- ======================================================
-    LOADER OVERLAY
-====================================================== -->
+<!-- LOADER OVERLAY -->
 <div id="loader" class="loader-overlay hidden">
     <div class="spinner"></div>
 </div>
 
-<!-- ======================================================
-    SCRIPTS
-====================================================== -->
+<!-- SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="API_Ops.js"></script>
 <script src="DB_Ops.js"></script>

@@ -1,11 +1,7 @@
-/* ======================================================
-    GOOGLE FONTS
-====================================================== */
+/* GOOGLE FONTS */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap');
 
-/* ======================================================
-    CSS VARIABLES
-====================================================== */
+/* CSS VARIABLES */
 :root {
     --bg-dark:       #0d1117;
     --bg-surface:    #161b22;
@@ -28,9 +24,7 @@
     --transition:    0.2s ease;
 }
 
-/* ======================================================
-    RESET & BASE
-====================================================== */
+/* RESET & BASE */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -43,18 +37,14 @@ body {
     flex-direction:   column;
 }
 
-/* ======================================================
-    CONTAINER
-====================================================== */
+/* CONTAINER */
 .container {
     max-width:     1200px;
     margin-inline: auto;
     padding-inline: 1.5rem;
 }
 
-/* ======================================================
-    LOGO & HEADER (FIXED)
-====================================================== */
+/* LOGO & HEADER (FIXED) */
 .site-header {
     background:      var(--bg-surface);
     border-bottom:   1px solid var(--border);
@@ -134,9 +124,7 @@ body {
     background: linear-gradient(135deg, #3b82f6 0%, var(--accent) 100%);
 }
 
-/* ======================================================
-    SEARCH SECTION
-====================================================== */
+/* SEARCH SECTION */
 .search-section {
     padding:    3rem 1.5rem 2rem;
     text-align: center;
@@ -189,9 +177,7 @@ body {
     color:      var(--text-muted);
 }
 
-/* ======================================================
-    SECTION TITLES
-====================================================== */
+/* SECTION TITLES */
 .results-section, .mylist-section { padding: 2rem 0 3rem; }
 .section-title {
     display:       flex;
@@ -203,21 +189,37 @@ body {
     margin-bottom: 1.5rem;
     color:         var(--text-primary);
 }
+
+/* EMPTY STATE STYLES */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.empty-state p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
 .title-icon   { font-size: 1.2rem; }
 .results-count { font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-main); }
 
-/* ======================================================
-    CARDS GRID
-====================================================== */
+/* CARDS GRID */
 .grid {
     display:               grid;
     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     gap:                   1.4rem;
 }
 
-/* ======================================================
-    CARD COMPONENT
-====================================================== */
+/* CARD COMPONENT */
 .card {
     background:     var(--bg-card);
     border:         1px solid var(--border);
@@ -337,9 +339,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* ======================================================
-    BUTTONS
-====================================================== */
+/* BUTTONS */
 .btn {
     display:       inline-flex;
     align-items:   center;
@@ -398,9 +398,7 @@ body {
 }
 .btn-secondary:hover { background: var(--bg-card-hover); color: var(--text-primary); }
 
-/* ======================================================
-    MODALS & OVERLAYS
-====================================================== */
+/* MODALS & OVERLAYS */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -501,9 +499,7 @@ body {
     transform: scale(1.05);
 }
 
-/* ======================================================
-    OVERLAY CONTAINER (MOVIE DETAILS)
-====================================================== */
+/* OVERLAY CONTAINER (MOVIE DETAILS) */
 .overlay-container {
     display: flex;
     gap: 30px;
@@ -573,9 +569,7 @@ body {
     padding: 10px 25px;
 }
 
-/* ======================================================
-    FORM GROUPS & ADD MOVIE MODAL STYLES
-====================================================== */
+/* FORM GROUPS & ADD MOVIE MODAL STYLES */
 .form-group { margin-bottom: 1.25rem; }
 .form-group label {
     display: block;
@@ -651,9 +645,7 @@ body {
     border-radius: 8px;
 }
 
-/* ======================================================
-    TOAST NOTIFICATION
-====================================================== */
+/* TOAST NOTIFICATION */
 .toast {
     position:      fixed;
     bottom:        1.5rem;
@@ -677,9 +669,7 @@ body {
 .toast-error   { background: #3a1a1a; color: var(--danger);  border: 1px solid var(--danger);  }
 .toast-info    { background: #1a2a3a; color: var(--accent);  border: 1px solid var(--accent);  }
 
-/* ======================================================
-    LOADER
-====================================================== */
+/* LOADER */
 .loader-overlay {
     position:        fixed;
     inset:           0;
@@ -722,9 +712,7 @@ body {
     color: var(--text-primary);
 }
 
-/* ======================================================
-    SITE FOOTER
-====================================================== */
+/* SITE FOOTER */
 .site-footer {
     background: var(--bg-surface);
     border-top: 1px solid var(--border);
@@ -742,41 +730,11 @@ body {
     margin-top: 0.3rem;
 }
 
-/* ======================================================
-    UTILITY CLASSES
-====================================================== */
+/* UTILITY CLASSES */
 .hidden { display: none !important; }
 body.modal-open { overflow: hidden; }
 
-/* ======================================================
-    EMPTY STATE STYLES (FIXED)
-====================================================== */
-
-.empty-state {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 4rem 2rem;
-    background: var(--bg-card);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border);
-}
-
-.empty-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.empty-state p {
-    font-size: 1rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-}
-
-/* ======================================================
-    CURSOR STYLES
-====================================================== */
-
+/* CURSOR STYLES */
 .card {
     cursor: pointer;
     transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
@@ -795,9 +753,7 @@ body.modal-open { overflow: hidden; }
     cursor: pointer;
 }
 
-/* ======================================================
-    RESPONSIVE DESIGN
-====================================================== */
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
     .modal-overlay {
         padding: 0.5rem;
