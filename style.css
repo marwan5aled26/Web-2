@@ -1,10 +1,10 @@
 /* ======================================================
-     GOOGLE FONTS
+    GOOGLE FONTS
 ====================================================== */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap');
 
 /* ======================================================
-     CSS VARIABLES
+    CSS VARIABLES
 ====================================================== */
 :root {
     --bg-dark:       #0d1117;
@@ -29,7 +29,7 @@
 }
 
 /* ======================================================
-     RESET & BASE
+    RESET & BASE
 ====================================================== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -44,7 +44,7 @@ body {
 }
 
 /* ======================================================
-     CONTAINER
+    CONTAINER
 ====================================================== */
 .container {
     max-width:     1200px;
@@ -53,7 +53,7 @@ body {
 }
 
 /* ======================================================
-     LOGO & HEADER (FIXED)
+    LOGO & HEADER (FIXED)
 ====================================================== */
 .site-header {
     background:      var(--bg-surface);
@@ -135,7 +135,7 @@ body {
 }
 
 /* ======================================================
-     SEARCH SECTION
+    SEARCH SECTION
 ====================================================== */
 .search-section {
     padding:    3rem 1.5rem 2rem;
@@ -190,7 +190,7 @@ body {
 }
 
 /* ======================================================
-     SECTION TITLES
+    SECTION TITLES
 ====================================================== */
 .results-section, .mylist-section { padding: 2rem 0 3rem; }
 .section-title {
@@ -207,7 +207,7 @@ body {
 .results-count { font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-main); }
 
 /* ======================================================
-     CARDS GRID
+    CARDS GRID
 ====================================================== */
 .grid {
     display:               grid;
@@ -216,7 +216,7 @@ body {
 }
 
 /* ======================================================
-     CARD COMPONENT
+    CARD COMPONENT
 ====================================================== */
 .card {
     background:     var(--bg-card);
@@ -338,7 +338,7 @@ body {
 }
 
 /* ======================================================
-     BUTTONS
+    BUTTONS
 ====================================================== */
 .btn {
     display:       inline-flex;
@@ -399,7 +399,7 @@ body {
 .btn-secondary:hover { background: var(--bg-card-hover); color: var(--text-primary); }
 
 /* ======================================================
-     MODALS & OVERLAYS
+    MODALS & OVERLAYS
 ====================================================== */
 .modal-overlay {
     position: fixed;
@@ -502,7 +502,7 @@ body {
 }
 
 /* ======================================================
-     OVERLAY CONTAINER (MOVIE DETAILS)
+    OVERLAY CONTAINER (MOVIE DETAILS)
 ====================================================== */
 .overlay-container {
     display: flex;
@@ -574,7 +574,7 @@ body {
 }
 
 /* ======================================================
-     FORM GROUPS & ADD MOVIE MODAL STYLES
+    FORM GROUPS & ADD MOVIE MODAL STYLES
 ====================================================== */
 .form-group { margin-bottom: 1.25rem; }
 .form-group label {
@@ -652,7 +652,7 @@ body {
 }
 
 /* ======================================================
-     TOAST NOTIFICATION
+    TOAST NOTIFICATION
 ====================================================== */
 .toast {
     position:      fixed;
@@ -678,7 +678,7 @@ body {
 .toast-info    { background: #1a2a3a; color: var(--accent);  border: 1px solid var(--accent);  }
 
 /* ======================================================
-     LOADER
+    LOADER
 ====================================================== */
 .loader-overlay {
     position:        fixed;
@@ -723,7 +723,7 @@ body {
 }
 
 /* ======================================================
-     SITE FOOTER
+    SITE FOOTER
 ====================================================== */
 .site-footer {
     background: var(--bg-surface);
@@ -743,7 +743,7 @@ body {
 }
 
 /* ======================================================
-     UTILITY CLASSES
+    UTILITY CLASSES
 ====================================================== */
 .hidden { display: none !important; }
 body.modal-open { overflow: hidden; }
@@ -796,7 +796,7 @@ body.modal-open { overflow: hidden; }
 }
 
 /* ======================================================
-     RESPONSIVE DESIGN
+    RESPONSIVE DESIGN
 ====================================================== */
 @media (max-width: 768px) {
     .modal-overlay {

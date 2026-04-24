@@ -324,8 +324,8 @@ function submitAddMovie() {
     }
 
     const currentYear = new Date().getFullYear();
-    if (year && (year < 1900 || year > currentYear + 1)) {
-        showFieldError('addYearError', `Year must be between 1900 and ${currentYear + 1}`);
+    if (year && (year < 1900 || year > 2026)) {
+        showFieldError('addYearError', `Year must be between 1900 and 2026`);
         hasError = true;
     }
 
@@ -564,15 +564,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const yearInput = document.getElementById('addYear');
     if (yearInput) {
-        const currentYear = new Date().getFullYear();
-        yearInput.max = currentYear + 1;
+        yearInput.max = 2026;
         yearInput.min = 1900;
 
         yearInput.addEventListener('blur', function() {
+            const maxYear = 2026;
             if (this.value.trim() !== '') {
                 const year = parseInt(this.value);
-                if (year < 1900 || year > currentYear + 1) {
-                    showFieldError('addYearError', `Year must be between 1900 and ${currentYear + 1}`);
+                if (year < 1900 || year > maxYear) {
+                    showFieldError('addYearError', `Year must be between 1900 and 2026`);
                 } else {
                     const yearError = document.getElementById('addYearError');
                     if (yearError) yearError.classList.add('hidden');

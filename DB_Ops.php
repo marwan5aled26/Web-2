@@ -54,13 +54,13 @@ if ($action === 'add') {
     }
 
     if (empty($year) || !preg_match('/^\d{4}$/', $year)) {
-        echo json_encode(["status" => "error", "message" => "Valid year is required (e.g., 2024)"]);
+        echo json_encode(["status" => "error", "message" => "Valid year is required (e.g., 2006)"]);
         exit();
     }
 
     $currentYear = date('Y');
-    if ($year < 1900 || $year > $currentYear + 1) {
-        echo json_encode(["status" => "error", "message" => "Year must be between 1900 and " . ($currentYear + 1)]);
+    if ($year < 1900 || $year > 2026) {
+        echo json_encode(["status" => "error", "message" => "Year must be between 1900 and 2026"]);
         exit();
     }
 

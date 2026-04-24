@@ -1,5 +1,5 @@
 <!-- ======================================================
-     HTML HEAD & HEADER NAVIGATION
+    HTML HEAD & HEADER NAVIGATION
 ====================================================== -->
 
 <!DOCTYPE html>
