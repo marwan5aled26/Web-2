@@ -1,16 +1,5 @@
 /* WATCHLIST CRUD OPERATIONS */
 
-// A function to convert text to HTML Entities to prevent XSS and preserve Arabic
-function escapeHtml(text) {
-    if (!text) return '';
-    return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-}
-
 function addToWatchlist(imdbId) {
     const btn = event.currentTarget;
     const isOverlay = btn.closest("#movieOverlay");
@@ -75,29 +64,28 @@ function loadWatchlist() {
             if (!movies.length) {
                 container.innerHTML = `<div class="empty-state"><div class="empty-icon">🎞️</div><p>Your watchlist is empty.<br>Search for a movie and add it!</p></div>`;
                 return;
-            }        
+            }
             
             container.innerHTML = movies.map(movie => {
                 const poster = (!movie.poster || movie.poster === "N/A") ? "https://via.placeholder.com/300x450?text=No+Image" : movie.poster;
                 const stars = movie.rating > 0 ? "★".repeat(Math.round(movie.rating / 2)) + "☆".repeat(5 - Math.round(movie.rating / 2)) : "";
                 const safeId = encodeURIComponent(String(movie.id));
-                const safeNote = movie.note || '';
+                const safeNote = encodeURIComponent(movie.note || '');
                 
                 return `
                     <div class="card" id="card-${movie.id}">
                         <div class="card-poster-wrap">
-                            <img src="${poster}" alt="${movie.title}" class="card-poster" 
-                                onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
+                            <img src="${poster}" alt="${movie.title}" class="card-poster" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
                             ${movie.rating > 0 ? `<div class="poster-score"><span class="score-star">★</span><span>${movie.rating}</span></div>` : ""}
                         </div>
                         <div class="card-body">
                             <h3 class="card-title">${movie.title}</h3>
                             <div class="card-meta"><span class="movie-year">${movie.year}</span></div>
                             ${movie.rating > 0 ? `<p class="card-stars">${stars}</p><p class="card-rating">${movie.rating} / 10</p>` : `<p class="no-rating">Not rated yet</p>`}
-                            ${movie.note ? `<p class="card-note" id="note-${movie.id}">${escapeHtml(movie.note)}</p>${movie.note.length > 120 ? `<button class="show-more-btn" onclick="toggleNote('${movie.id}', this)">Show More</button>` : ""}` : ""}
+                            ${movie.note ? `<p class="card-note" id="note-${movie.id}">${movie.note}</p>${movie.note.length > 120 ? `<button class="show-more-btn" onclick="toggleNote('${movie.id}', this)">Show More</button>` : ""}` : ""}
                         </div>
                         <div class="card-actions">
-                            <button class="btn btn-edit" onclick="openModal('${safeId}', ${movie.rating || 0}, '${escapeHtml(safeNote)}')">Edit</button>
+                            <button class="btn btn-edit" onclick="openModal('${safeId}', ${movie.rating || 0}, '${safeNote}')">Edit</button>
                             <button class="btn btn-delete" onclick="deleteMovie('${safeId}')">Delete</button>
                         </div>
                     </div>
@@ -133,10 +121,9 @@ function updateButtonsFromWatchlist() {
 
 function openModal(id, rating, note) {
     document.getElementById("editId").value = id;
-    document.getElementById("editRating").value = rating;  
-    const decodedNote = note ? note.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&') : '';
-    document.getElementById("editNote").value = decodedNote;
-    document.getElementById("charCount").textContent = decodedNote.length + " / 500";
+    document.getElementById("editRating").value = rating;
+    document.getElementById("editNote").value = note;
+    document.getElementById("charCount").textContent = note.length + " / 500";
     document.getElementById("modalOverlay").classList.remove("hidden");
 }
 
