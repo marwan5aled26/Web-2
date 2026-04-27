@@ -22,10 +22,18 @@ function addToWatchlist(imdbId) {
         success: function(data) {
             if (data.status === "success") {
                 showToast("Added to watchlist! 🎬", "success");
-                [`btn-${imdbId}`, "overlay-add-btn"].forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) { el.disabled = true; el.textContent = "✓ Added"; el.classList.add("is-added"); }
-                });
+                const searchBtn = document.getElementById(`btn-${imdbId}`);
+                if (searchBtn) {
+                    searchBtn.disabled = true;
+                    searchBtn.textContent = "✓ Added";
+                    searchBtn.classList.add("is-added");
+                }
+                const overlayBtn = document.getElementById("overlay-add-btn");
+                if (overlayBtn) {
+                    overlayBtn.disabled = true;
+                    overlayBtn.textContent = "✓ Added";
+                    overlayBtn.classList.add("is-added");
+                }
                 loadWatchlist();
             } else showToast(data.message, "error");
         },
@@ -74,7 +82,7 @@ function loadWatchlist() {
                 
                 return `
                     <div class="card" id="card-${movie.id}">
-                        <div class="card-poster-wrap">
+                        <div class="card-poster-wrap" onclick="showMovieDetailsFromWatchlist('${movie.id}')" style="cursor:pointer">
                             <img src="${poster}" alt="${movie.title}" class="card-poster" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
                             ${movie.rating > 0 ? `<div class="poster-score"><span class="score-star">★</span><span>${movie.rating}</span></div>` : ""}
                         </div>
@@ -94,7 +102,6 @@ function loadWatchlist() {
         }
     });
 }
-
 function toggleNote(id, btn) {
     const note = document.getElementById(`note-${id}`);
     const isExpanded = note.style.webkitLineClamp === "unset";
@@ -120,10 +127,17 @@ function updateButtonsFromWatchlist() {
 /* EDIT MODAL */
 
 function openModal(id, rating, note) {
+    let decodedNote = note;
+    try {
+        decodedNote = decodeURIComponent(note);
+    } catch(e) {
+        decodedNote = note;
+    }
+    
     document.getElementById("editId").value = id;
     document.getElementById("editRating").value = rating;
-    document.getElementById("editNote").value = note;
-    document.getElementById("charCount").textContent = note.length + " / 500";
+    document.getElementById("editNote").value = decodedNote;
+    document.getElementById("charCount").textContent = decodedNote.length + " / 500";
     document.getElementById("modalOverlay").classList.remove("hidden");
 }
 
@@ -133,8 +147,14 @@ function closeModalDirect() { document.getElementById("modalOverlay").classList.
 function saveEdit() {
     const id = document.getElementById("editId").value;
     const rating = parseFloat(document.getElementById("editRating").value);
-    const note = document.getElementById("editNote").value.trim();
+    let note = document.getElementById("editNote").value.trim();
     const ratingError = document.getElementById("ratingError");
+    
+    if (note.includes('%')) {
+        try {
+            note = decodeURIComponent(note);
+        } catch(e) {}
+    }
     
     if (isNaN(rating) || rating < 0 || rating > 10) {
         ratingError.classList.remove("hidden");
@@ -256,7 +276,7 @@ function addMovieToDatabase(id, title, year, rating, note, poster) {
             if (data.status === 'success') {
                 closeAddMovieModalDirect();
                 loadWatchlist();
-                openAddMovieModal(); // reset form via reopening then closing
+                openAddMovieModal();
                 closeAddMovieModalDirect();
             } else {
                 showFieldError(data.message.includes('duplicate') || data.message.includes('exists') ? 'addIdError' : 'addTitleError', data.message);
@@ -283,16 +303,31 @@ function hideLoader() { document.getElementById('loader').classList.add('hidden'
 document.addEventListener("DOMContentLoaded", function() {
     loadWatchlist();
     
+    // Restore last search results if available
     const lastResults = sessionStorage.getItem("lastResults");
     const lastMoviesData = sessionStorage.getItem("lastMoviesData");
+    
     if (lastResults && lastMoviesData) {
+        // Restore the last search results HTML
         document.getElementById("results").innerHTML = lastResults;
         document.getElementById("resultsSection").style.display = "block";
-        if (typeof globalMoviesData !== 'undefined') window.globalMoviesData = JSON.parse(lastMoviesData);
+        
+        // Restore data in globalMoviesData
+        const restoredData = JSON.parse(lastMoviesData);
+        globalMoviesData = restoredData;
+        
+        // Rebuild onclick links
+        document.querySelectorAll('#results .card-poster-wrap').forEach((element, index) => {
+            const movieId = restoredData[index]?.id;
+            if (movieId) {
+                element.onclick = function() {
+                    showMovieDetails(movieId);
+                };
+            }
+        });
+        
         updateButtonsFromWatchlist();
-    }
-    
-    // Single event listener for all note inputs
+    }    
     document.getElementById("editNote")?.addEventListener("input", function() {
         document.getElementById("charCount").textContent = this.value.length + " / 500";
     });
