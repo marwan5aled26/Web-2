@@ -184,5 +184,7 @@ Before submitting:
 
 ---
 
-Made with Laravel by Team MovieTracker
-Cairo University • IS333 Spring 2026
+<p align="center">
+  <b>🎬 Made with passion by Team MovieTracker</b><br>
+  <sub>Cairo University • Faculty of Computers & Artificial Intelligence</sub>
+</p>
