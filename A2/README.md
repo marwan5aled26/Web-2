@@ -49,45 +49,28 @@ This is Assignment 2 for the IS333 Web-Based Information Systems course. The pro
 | Service Pattern | API calls isolated in service class |
 | Environment Variables | API keys in .env file |
 
-### Project Structure
+### File Structure
 
-Assignment-2/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── MovieController.php
-│   │   │   └── ApiController.php
-│   │   └── Requests/
-│   │       └── MovieRequest.php
-│   ├── Models/
-│   │   └── Movie.php
-│   └── Services/
-│       └── OmdbService.php
-├── database/
-│   ├── database.sqlite
-│   ├── migrations/
-│   │   └── create_movies_table.php
-├── resources/
-│   └── views/
-│       ├── layouts/
-│       │   └── app.blade.php
-│       ├── welcome.blade.php
-│       ├── watchlist.blade.php
-│       └── partials/
-│           ├── header.blade.php
-│           └── footer.blade.php
-├── routes/
-│   └── web.php
-├── public/
-│   └── css/
-│       └── style.css
-├── tests/
-│   ├── Feature/
-│   │   └── MovieTest.php
-│   └── Unit/
-│       └── MovieUnitTest.php
-├── .env
-└── Team_Members.txt
+| File | Job |
+|------|-----|
+| `app/Http/Controllers/MovieController.php` | CRUD operations (add, edit, delete, view) |
+| `app/Http/Controllers/ApiController.php` | OMDb API calls (search movies) |
+| `app/Http/Requests/MovieRequest.php` | Server-side validation rules |
+| `app/Models/Movie.php` | Eloquent model for database |
+| `app/Services/OmdbService.php` | API service layer (hides API key logic) |
+| `database/migrations/create_movies_table.php` | Database schema setup |
+| `database/database.sqlite` | SQLite database file |
+| `resources/views/layouts/app.blade.php` | Master layout (header + footer) |
+| `resources/views/welcome.blade.php` | Homepage with search |
+| `resources/views/watchlist.blade.php` | Watchlist display page |
+| `resources/views/partials/header.blade.php` | Top navigation bar |
+| `resources/views/partials/footer.blade.php` | Bottom credits |
+| `routes/web.php` | All application routes |
+| `public/css/style.css` | All colors & designs (ported from A1) |
+| `tests/Feature/MovieTest.php` | Feature tests (end-to-end) |
+| `tests/Unit/MovieUnitTest.php` | Unit tests (isolated logic) |
+| `.env` | API keys & environment config |
+| `Team_Members.txt` | Team information |
 
 ### Routes
 
