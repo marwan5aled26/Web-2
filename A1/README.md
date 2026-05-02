@@ -81,25 +81,6 @@
 
 ---
 
-## 👥 Team
-
-**Cairo University - Faculty of Computing & AI**  
-*IS333 Web-Based Information Systems | Spring 2026*
-
-| Name | ID |
-|------|-----|
-| Nada Shaaban Abdelrahman | 20231187 |
-| Omnia Hassan Sayed | 20231027 |
-| Yasmine Mohamed Maher | 20240833 |
-| Marwan Khaled Sayed | 20230383 |
-| Youssef Mohamed Mohamed | 20230511 |
-| Youssef Ayman Bauomi | 20230483 |
-| Mariam Ashraf | 20220543 |
-| Almoaid Hashem Hashem | 20210625 |
-| Basel Osama | 20221254 |
-
----
-
 ## 🚀 Local Setup
 
 1. Install XAMPP
@@ -112,5 +93,5 @@
 
 <p align="center">
   <b>🎬 Made with passion by Team MovieTracker</b><br>
-  <sub>Cairo University • Faculty of Computing & AI</sub>
+  <sub>Cairo University • Faculty of Computers & Artificial Intelligence</sub>
 </p>
