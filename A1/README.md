@@ -1,4 +1,5 @@
-🎬 MovieTracker
+#🎬 MovieTracker
+
 https://img.shields.io/badge/Live-Demo-58a6ff?style=for-the-svg&logo=google-chrome
 https://img.shields.io/badge/PHP-777BB4?style=for-the-svg&logo=php
 https://img.shields.io/badge/MySQL-4479A1?style=for-the-svg&logo=mysql
