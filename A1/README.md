@@ -3,6 +3,8 @@
 **A Web-Based Movie Watchlist Manager**  
 *Search • Track • Rate • Enjoy*
 
+---
+
 🔗 **Live Demo:** [movietracker-fcai-cu.infinityfree.me](https://movietracker-fcai-cu.infinityfree.me)
 
 ---
@@ -34,7 +36,7 @@
 
 ### Key Concepts Learned
 
-| Concept | What It Means |
+| Concept | Implementation |
 |---------|----------------|
 | Three-Tier Architecture | UI ↔ Logic ↔ Database - each layer separate |
 | AJAX | Page never reloads - data loads silently in background |
