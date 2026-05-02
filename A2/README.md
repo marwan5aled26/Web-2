@@ -3,6 +3,8 @@
 **A Web-Based Movie Watchlist Manager Built with Laravel**
 *Search • Track • Rate • Enjoy*
 
+---
+
 🔗 **Live Demo:** Coming Soon
 
 ---
