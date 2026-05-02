@@ -1,6 +1,7 @@
 # 🎬 MovieTracker
 
 **A Web-Based Movie Watchlist Manager**  
+
 *Search • Track • Rate • Enjoy*
 
 ---
