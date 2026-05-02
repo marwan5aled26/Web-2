@@ -1,32 +1,14 @@
 # 🎬 MovieTracker
 
 **A Web-Based Movie Watchlist Manager**  
-*Search • Track • Rate • Enjoy*
 
-🔗 **Live Demo:** [movietracker-fcai-cu.infinityfree.me](https://movietracker-fcai-cu.infinityfree.me)
+*Search • Track • Rate • Enjoy*
 
 ---
 
-## 📌 For Users
+## 🔗 **Live Demo:**
 
-### What You Can Do
-
-| Feature | Description |
-|---------|-------------|
-| 🔍 Search Movies | Find any movie with plot, cast & IMDb rating |
-| ➕ Build Watchlist | Save movies you want to watch |
-| ⭐ Rate Movies | Give ratings from 0 to 10 |
-| 📝 Add Notes | Write your personal thoughts |
-| 🖼️ Upload Posters | Add custom images (URL or file) |
-| ✏️ Edit Anytime | Update ratings & notes later |
-| 🗑️ Remove Movies | Delete from watchlist |
-
-### How to Use
-
-1. **Search** – Type a movie name and hit search
-2. **Add** – Click "Add to Watchlist" to save it
-3. **View** – Go to "My Watchlist" to see all saved movies
-4. **Customize** – Click "Edit" to rate or add notes
+[movietracker-fcai-cu.infinityfree.me](https://movietracker-fcai-cu.infinityfree.me)
 
 ---
 
@@ -34,7 +16,7 @@
 
 ### Key Concepts Learned
 
-| Concept | What It Means |
+| Concept | Implementation |
 |---------|----------------|
 | Three-Tier Architecture | UI ↔ Logic ↔ Database - each layer separate |
 | AJAX | Page never reloads - data loads silently in background |
@@ -81,25 +63,6 @@
 
 ---
 
-## 👥 Team
-
-**Cairo University - Faculty of Computing & AI**  
-*IS333 Web-Based Information Systems | Spring 2026*
-
-| Name | ID |
-|------|-----|
-| Nada Shaaban Abdelrahman | 20231187 |
-| Omnia Hassan Sayed | 20231027 |
-| Yasmine Mohamed Maher | 20240833 |
-| Marwan Khaled Sayed | 20230383 |
-| Youssef Mohamed Mohamed | 20230511 |
-| Youssef Ayman Bauomi | 20230483 |
-| Mariam Ashraf | 20220543 |
-| Almoaid Hashem Hashem | 20210625 |
-| Basel Osama | 20221254 |
-
----
-
 ## 🚀 Local Setup
 
 1. Install XAMPP
@@ -112,5 +75,5 @@
 
 <p align="center">
   <b>🎬 Made with passion by Team MovieTracker</b><br>
-  <sub>Cairo University • Faculty of Computing & AI</sub>
+  <sub>Cairo University • Faculty of Computers & Artificial Intelligence</sub>
 </p>
