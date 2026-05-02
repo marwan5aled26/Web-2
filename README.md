@@ -25,6 +25,7 @@ A2: Coming Soon
 ## 📁 Folder Structure
 
 Assignment-1    ->    # Vanilla PHP version
+
 Assignment-2    ->    # Laravel version
 
 ---
