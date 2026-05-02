@@ -1,13 +1,9 @@
 # 🎬 MovieTracker - Laravel Edition
 
-A Web-Based Movie Watchlist Manager Built with Laravel
-Search • Track • Rate • Enjoy
+**A Web-Based Movie Watchlist Manager Built with Laravel**
+*Search • Track • Rate • Enjoy*
 
----
-
-## 📌 About This Project
-
-This is Assignment 2 for the IS333 Web-Based Information Systems course. The project migrates the original MovieTracker application from Vanilla PHP to the Laravel Framework.
+🔗 **Live Demo:** Coming Soon
 
 ---
 
@@ -17,26 +13,26 @@ This is Assignment 2 for the IS333 Web-Based Information Systems course. The pro
 
 | Feature | Description |
 |---------|-------------|
-| Search Movies | Find any movie with plot, cast & IMDb rating |
-| Build Watchlist | Save movies you want to watch |
-| Rate Movies | Give ratings from 0 to 10 |
-| Add Notes | Write your personal thoughts |
-| Upload Posters | Add custom images (URL or file) |
-| Edit Anytime | Update ratings & notes later |
-| Remove Movies | Delete from watchlist |
+| 🔍 Search Movies | Find any movie with plot, cast & IMDb rating |
+| ➕ Build Watchlist | Save movies you want to watch |
+| ⭐ Rate Movies | Give ratings from 0 to 10 |
+| 📝 Add Notes | Write your personal thoughts |
+| 🖼️ Upload Posters | Add custom images (URL or file) |
+| ✏️ Edit Anytime | Update ratings & notes later |
+| 🗑️ Remove Movies | Delete from watchlist |
 
 ### How to Use
 
-1. Search - Type a movie name and hit search
-2. Add - Click "Add to Watchlist" to save it
-3. View - Go to "My Watchlist" to see all saved movies
-4. Customize - Click "Edit" to rate or add notes
+1. **Search** – Type a movie name and hit search
+2. **Add** – Click "Add to Watchlist" to save it
+3. **View** – Go to "My Watchlist" to see all saved movies
+4. **Customize** – Click "Edit" to rate or add notes
 
 ---
 
 ## 👨‍💻 For Developers
 
-### Laravel Concepts Used
+###  Key Concepts Learned
 
 | Concept | Implementation |
 |---------|----------------|
@@ -85,11 +81,22 @@ This is Assignment 2 for the IS333 Web-Based Information Systems course. The pro
 
 ### Tech Stack
 
-- Framework: Laravel 10+
-- Frontend: HTML5, CSS3, JavaScript, jQuery, AJAX
-- Database: SQLite (Eloquent ORM)
-- API: OMDb API
-- Testing: PHPUnit
+- **Framework**: Laravel 10+
+- **Frontend**: HTML5, CSS3, JavaScript, jQuery, AJAX
+- **Database**: SQLite (Eloquent ORM)
+- **API**: OMDb API
+- **Testing**: PHPUnit
+
+---
+
+## 🔐 Security Features
+
+| Risk | Protection |
+|------|------------|
+| SQL Injection | Eloquent ORM |
+| XSS Attacks | Blade auto-escaping |
+| CSRF | Laravel CSRF tokens |
+| API Keys | Stored in .env file |
 
 ---
 
@@ -124,46 +131,6 @@ OMDB_API_KEY=your_api_key_here
 ## 🧪 Running Tests
 
 php artisan test
-
----
-
-## 🔐 Security Features
-
-| Risk | Protection |
-|------|------------|
-| SQL Injection | Eloquent ORM |
-| XSS Attacks | Blade auto-escaping |
-| CSRF | Laravel CSRF tokens |
-| API Keys | Stored in .env file |
-
----
-
-## 👥 Team
-
-Cairo University - Faculty of Computing & AI
-IS333 Web-Based Information Systems | Spring 2026
-
-| Name | ID |
-|------|-----|
-| Nada Shaaban Abdelrahman | 20231187 |
-| Omnia Hassan Sayed | 20231027 |
-| Yasmine Mohamed Maher | 20240833 |
-| Marwan Khaled Sayed | 20230383 |
-| Youssef Mohamed Mohamed | 20230511 |
-| Youssef Ayman Bauomi | 20230483 |
-| Mariam Ashraf | 20220543 |
-| Almoaid Hashem Hashem | 20210625 |
-| Basel Osama | 20221254 |
-
----
-
-## 📦 Submission Notes
-
-Before submitting:
-
-1. Delete vendor/ folder
-2. Ensure database/database.sqlite exists
-3. Zip folder as: TeamNumber_ASSIGNMENT-2.zip
 
 ---
 
