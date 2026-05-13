@@ -9,12 +9,12 @@ class Movie extends Model
 {
     use HasFactory;
 
-    protected $table = 'movies';
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = [
-        'id', 'title', 'year', 'rating', 'note', 'poster'
-    ];
+    protected $fillable = ['id', 'title', 'year', 'rating', 'note', 'poster'];
+
+    protected $casts = ['rating' => 'float'];
+    
 }
