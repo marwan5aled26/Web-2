@@ -20,6 +20,13 @@
 
     <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
 
+    <div id="movieOverlay" class="modal-overlay hidden" onclick="closeOverlay(event)">
+    <div class="modal-content movie-detail-modal">
+        <button class="close-btn" onclick="this.closest('.modal-overlay').classList.add('hidden')">&times;</button>
+        <div id="overlayBody"></div>
+    </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $.ajaxSetup({
