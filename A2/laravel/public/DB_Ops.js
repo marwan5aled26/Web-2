@@ -1,24 +1,18 @@
-/* WATCHLIST CRUD OPERATIONS */
-
 function addToWatchlist(imdbId) {
     const btn = event.currentTarget;
     const isOverlay = btn.closest("#movieOverlay");
     
-    const title = isOverlay 
-        ? document.querySelector(".overlay-title").textContent.replace(/\(.*\)/, '').trim()
-        : btn.closest(".card").querySelector(".card-title").textContent.trim();
+    const title = isOverlay ? document.querySelector(".overlay-title").textContent.replace(/\(.*\)/, '').trim() : btn.closest(".card").querySelector(".card-title").textContent.trim();
     
-    const year = isOverlay
-        ? document.querySelector(".year-span").textContent.replace(/[()]/g, '')
-        : (btn.closest(".card").querySelector(".movie-year") || btn.closest(".card").querySelector(".card-year")).textContent.replace("Year:", "").trim();
+    const year = isOverlay ? document.querySelector(".year-span").textContent.replace(/[()]/g, '') : (btn.closest(".card").querySelector(".movie-year") || btn.closest(".card").querySelector(".card-year")).textContent.replace("Year:", "").trim();
     
-    const poster = isOverlay
-        ? document.querySelector(".overlay-poster img").src
-        : btn.closest(".card").querySelector(".card-poster").src;
+    const poster = isOverlay ? document.querySelector(".overlay-poster img").src : btn.closest(".card").querySelector(".card-poster").src;
 
     $.ajax({
-        url: "/add-movie", method: "POST", dataType: "json",
-        data: { action: "add", id: imdbId, title: title, year: year, rating: 0, note: "", poster: poster },
+        url: "/add-movie",
+        method: "POST",
+        dataType: "json",
+        data: { id: imdbId, title: title, year: year, rating: 0, note: "", poster: poster },
         success: function(data) {
             if (data.status === "success") {
                 showToast("Added to watchlist! 🎬", "success");
@@ -44,7 +38,9 @@ function addToWatchlist(imdbId) {
 function deleteMovie(id) {
     if (!confirm("Remove this movie from your watchlist?")) return;
     $.ajax({
-        url: "/delete-movie/" + id, method: "DELETE", dataType: "json",
+        url: "/delete-movie/" + id,
+        method: "DELETE",
+        dataType: "json",
         success: function(data) {
             if (data.status === "success") {
                 showToast("Movie removed.", "info");
@@ -60,7 +56,9 @@ function deleteMovie(id) {
 
 function loadWatchlist() {
     $.ajax({
-        url: "/get-movies", method: "GET", dataType: "json",
+        url: "/get-movies",
+        method: "GET",
+        dataType: "json",
         success: function(data) {
             if (data.status !== "success") return showToast("Failed to load watchlist.", "error");
             const movies = data.data;
@@ -78,28 +76,27 @@ function loadWatchlist() {
                 const safeId = encodeURIComponent(String(movie.id));
                 const safeNote = encodeURIComponent(movie.note || '');
                 
-                return `
-                    <div class="card" id="card-${movie.id}">
-                        <div class="card-poster-wrap" onclick="showMovieDetailsFromWatchlist('${movie.id}')" style="cursor:pointer">
-                            <img src="${poster}" alt="${movie.title}" class="card-poster" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
-                            ${movie.rating > 0 ? `<div class="poster-score"><span class="score-star">★</span><span>${movie.rating}</span></div>` : ""}
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">${movie.title}</h3>
-                            <div class="card-meta"><span class="movie-year">${movie.year}</span></div>
-                            ${movie.rating > 0 ? `<p class="card-stars">${stars}</p><p class="card-rating">${movie.rating} / 10</p>` : `<p class="no-rating">Not rated yet</p>`}
-                            ${movie.note ? `<p class="card-note" id="note-${movie.id}">${movie.note}</p>${movie.note.length > 120 ? `<button class="show-more-btn" onclick="toggleNote('${movie.id}', this)">Show More</button>` : ""}` : ""}
-                        </div>
-                        <div class="card-actions">
-                            <button class="btn btn-edit" onclick="openModal('${safeId}', ${movie.rating || 0}, '${safeNote}')">Edit</button>
-                            <button class="btn btn-delete" onclick="deleteMovie('${safeId}')">Delete</button>
-                        </div>
+                return `<div class="card" id="card-${movie.id}">
+                    <div class="card-poster-wrap" onclick="showMovieDetailsFromWatchlist('${movie.id}')" style="cursor:pointer">
+                        <img src="${poster}" alt="${movie.title}" class="card-poster" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
+                        ${movie.rating > 0 ? `<div class="poster-score"><span class="score-star">★</span><span>${movie.rating}</span></div>` : ""}
                     </div>
-                `;
+                    <div class="card-body">
+                        <h3 class="card-title">${movie.title}</h3>
+                        <div class="card-meta"><span class="movie-year">${movie.year}</span></div>
+                        ${movie.rating > 0 ? `<p class="card-stars">${stars}</p><p class="card-rating">${movie.rating} / 10</p>` : `<p class="no-rating">Not rated yet</p>`}
+                        ${movie.note ? `<p class="card-note" id="note-${movie.id}">${movie.note}</p>${movie.note.length > 120 ? `<button class="show-more-btn" onclick="toggleNote('${movie.id}', this)">Show More</button>` : ""}` : ""}
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-edit" onclick="openModal('${safeId}', ${movie.rating || 0}, '${safeNote}')">Edit</button>
+                        <button class="btn btn-delete" onclick="deleteMovie('${safeId}')">Delete</button>
+                    </div>
+                </div>`;
             }).join('');
         }
     });
 }
+
 function toggleNote(id, btn) {
     const note = document.getElementById(`note-${id}`);
     const isExpanded = note.style.webkitLineClamp === "unset";
@@ -107,21 +104,27 @@ function toggleNote(id, btn) {
     btn.innerText = isExpanded ? "Show More" : "Show Less";
 }
 
-function updateButtonsFromWatchlist() {
+function showMovieDetailsFromWatchlist(id) {
     $.ajax({
-        url: "/get-movies", method: "GET", dataType: "json",
+        url: "/get-movies",
+        method: "GET",
+        dataType: "json",
         success: function(data) {
-            if (data.status === "success") {
-                data.data.forEach(movie => {
-                    const btn = document.getElementById(`btn-${movie.id}`);
-                    if (btn) { btn.disabled = true; btn.textContent = "✓ Added"; btn.classList.add("is-added"); }
-                });
+            const movie = data.data.find(m => m.id === id);
+            if (movie) {
+                document.getElementById('overlayBody').innerHTML = `<div class="overlay-container">
+                    <div class="overlay-poster"><img src="${movie.poster}" /></div>
+                    <div class="overlay-info">
+                        <h2 class="overlay-title">${movie.title} <span class="year-span">(${movie.year})</span></h2>
+                        ${movie.rating > 0 ? `<div class="overlay-meta">⭐ ${movie.rating}/10</div>` : ''}
+                        ${movie.note ? `<div class="plot-section"><p class="section-label">YOUR NOTE</p><p class="plot-text">${movie.note}</p></div>` : ''}
+                    </div>
+                </div>`;
+                document.getElementById('movieOverlay').classList.remove('hidden');
             }
         }
     });
 }
-
-/* EDIT MODAL */
 
 function openModal(id, rating, note) {
     let decodedNote = note;
@@ -160,7 +163,9 @@ function saveEdit() {
     ratingError.classList.add("hidden");
     
     $.ajax({
-        url: "/update-movie/" + id, method: "PUT", dataType: "json",
+        url: "/update-movie/" + id,
+        method: "PUT",
+        dataType: "json",
         data: { rating: rating, note: note },
         success: function(data) {
             if (data.status === "success") {
@@ -171,8 +176,6 @@ function saveEdit() {
         }
     });
 }
-
-/* ADD MOVIE MODAL */
 
 function openAddMovieModal() {
     ['addId', 'addTitle', 'addYear', 'addRating', 'addNote', 'addPoster'].forEach(id => {
@@ -252,7 +255,12 @@ function submitAddMovie() {
         const formData = new FormData();
         formData.append('poster_file', file);
         $.ajax({
-            url: 'Upload.php', method: 'POST', data: formData, processData: false, contentType: false, dataType: 'json',
+            url: '/upload-poster',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
             success: (uploadData) => uploadData.success ? addMovieToDatabase(id, title, year || null, rating || 0, note, uploadData.filepath) : (hideLoader(), showFieldError('addFileError', uploadData.error)),
             error: () => { hideLoader(); showFieldError('addFileError', 'Failed to upload poster image'); }
         });
@@ -266,24 +274,23 @@ function submitAddMovie() {
 
 function addMovieToDatabase(id, title, year, rating, note, poster) {
     $.ajax({
-        url: 'DB_Ops.php', method: 'POST', dataType: 'json',
-        data: { action: 'add', id: id, title: title, year: year, rating: rating || 0, note: note, poster: poster },
+        url: '/add-movie',
+        method: 'POST',
+        dataType: 'json',
+        data: { id: id, title: title, year: year, rating: rating || 0, note: note, poster: poster },
         success: function(data) {
             hideLoader();
             if (data.status === 'success') {
+                showToast("Movie added successfully!", "success");
                 closeAddMovieModalDirect();
                 loadWatchlist();
-                openAddMovieModal();
-                closeAddMovieModalDirect();
             } else {
-                showFieldError(data.message.includes('duplicate') || data.message.includes('exists') ? 'addIdError' : 'addTitleError', data.message);
+                showFieldError('addIdError', data.message);
             }
         },
         error: () => { hideLoader(); showFieldError('addTitleError', 'Failed to add movie'); }
     });
 }
-
-/* TOAST & LOADER */
 
 function showToast(msg, type = "info") {
     const toast = document.getElementById("toast");
@@ -295,36 +302,26 @@ function showToast(msg, type = "info") {
 function showLoader() { document.getElementById('loader').classList.remove('hidden'); }
 function hideLoader() { document.getElementById('loader').classList.add('hidden'); }
 
-/* INIT */
-
 document.addEventListener("DOMContentLoaded", function() {
     loadWatchlist();
     
-    // Restore last search results if available
     const lastResults = sessionStorage.getItem("lastResults");
     const lastMoviesData = sessionStorage.getItem("lastMoviesData");
     
     if (lastResults && lastMoviesData) {
-        // Restore the last search results HTML
         document.getElementById("results").innerHTML = lastResults;
         document.getElementById("resultsSection").style.display = "block";
-        
-        // Restore data in globalMoviesData
         const restoredData = JSON.parse(lastMoviesData);
         globalMoviesData = restoredData;
         
-        // Rebuild onclick links
         document.querySelectorAll('#results .card-poster-wrap').forEach((element, index) => {
             const movieId = restoredData[index]?.id;
             if (movieId) {
-                element.onclick = function() {
-                    showMovieDetails(movieId);
-                };
+                element.onclick = function() { showMovieDetails(movieId); };
             }
         });
-        
-        updateButtonsFromWatchlist();
-    }    
+    }
+    
     document.getElementById("editNote")?.addEventListener("input", function() {
         document.getElementById("charCount").textContent = this.value.length + " / 500";
     });
@@ -333,7 +330,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("addCharCount").textContent = this.value.length + " / 500";
     });
     
-    // File preview
     document.getElementById('addPosterFile')?.addEventListener('change', function(e) {
         const file = e.target.files[0];
         const preview = document.getElementById('filePreview');
@@ -361,7 +357,6 @@ document.addEventListener("DOMContentLoaded", function() {
         reader.readAsDataURL(file);
     });
     
-    // Input validations
     const idInput = document.getElementById('addId');
     if (idInput) {
         idInput.addEventListener('input', function() {
