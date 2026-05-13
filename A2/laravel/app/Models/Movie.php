@@ -11,7 +11,7 @@ class Movie extends Model
 
     protected $table = 'movies';
     protected $primaryKey = 'id';
-    public $incrementing = false;    // عشان الـ id مش auto-increment
+    public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [
