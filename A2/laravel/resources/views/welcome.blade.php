@@ -28,6 +28,16 @@
         </div>
     </section>
 
+    <div id="movieOverlay" class="modal-overlay hidden" onclick="closeOverlay(event)">
+    <div class="modal-content movie-detail-modal">
+        <button class="close-btn" onclick="this.closest('.modal-overlay').classList.add('hidden')">&times;</button>
+        <div id="overlayBody"></div>
+    </div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+
+
     <section id="myListSection" class="mylist-section">
     <div class="container">
         <h2 class="section-title">
