@@ -61,6 +61,7 @@ class MovieController extends Controller
             'note'   => $validated['note'] ?? '',
             'poster' => $validated['poster'] ?? 'https://via.placeholder.com/300x450?text=No+Poster',
         ]);
+
         return response()->json(['status' => 'success', 'data' => $validated]);
     }
 

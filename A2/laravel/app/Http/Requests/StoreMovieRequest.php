@@ -27,7 +27,7 @@ class StoreMovieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id'     => ['required', 'string', 'max:20', 'regex:/^(tt)?[0-9]+$/', 'unique:movie_laravel,id'],
+            'id'     => ['required', 'string', 'max:20', 'regex:/^(tt)?[0-9]+$/', 'unique:movies_laravel,id'],
             'title'  => ['required', 'string', 'max:255'],
             'year'   => ['nullable', 'integer', 'min:1900', 'max:2027'],
             'rating' => ['nullable', 'numeric', 'min:0', 'max:10'],
