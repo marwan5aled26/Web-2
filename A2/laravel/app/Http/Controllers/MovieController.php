@@ -90,15 +90,57 @@ class MovieController extends Controller
     public function searchMovie(request $request)
     {
 
-        $apiKey = API_KEY;
-        $url = API_URL . '?' . http_build_query([
+        $apiKey = env('API_KEY');
+
+
+        $url = env('API_URL') . '?' . http_build_query([
             'apikey' => $apiKey,
             's' => $request->query('query'),
             'type' => 'movie'
         ]);
 
         $result = callAPI('GET', $url);
-        return response()->json(['status' => 'success', 'data' =>$result]);
+        $data = json_decode($result, true);
+        
+         if ($data['Response'] === 'True') {
+            $movies = [];
+
+            foreach ($data['Search'] as $movie) {
+                $detailsUrl = env('API_URL') . '?' . http_build_query([
+                    'apikey' => $apiKey,
+                    'i' => $movie['imdbID']
+                ]);
+
+                $detailsResult = callAPI('GET', $detailsUrl);
+                $detailed = null;
+
+                if ($detailsResult !== false && $detailsResult !== null && $detailsResult !== '') {
+                    $detailsData = json_decode($detailsResult, true);
+                    if (is_array($detailsData) && isset($detailsData['Response']) && $detailsData['Response'] === 'True') {
+                        $detailed = $detailsData;
+                    }
+                }
+
+                $movies[] = [
+                    'title' => $movie['Title'],
+                    'year' => $movie['Year'],
+                    'id' => $movie['imdbID'],
+                    'type' => $movie['Type'],
+                    'poster' => $movie['Poster'],
+                    'detailed' => $detailed
+                ];
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'movies' => $movies
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => isset($data['Error']) ? $data['Error'] : 'Movie not found'
+            ]);
+        }
     }
 
 }

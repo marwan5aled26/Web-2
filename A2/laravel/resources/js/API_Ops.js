@@ -43,11 +43,10 @@ function searchMovie() {
 
     $.ajax({
         url: "/searchMovie",
-        method: "Get",
+        method: "GET",
         dataType: "json",
         data: { query: query },
         success: function (data) {
-            console.log("Done");
             if (data.status === "success") {
                 globalMoviesData = data.movies;
                 let resultsHTML = "";
@@ -82,12 +81,12 @@ function searchMovie() {
                 sessionStorage.setItem("lastMoviesData", JSON.stringify(globalMoviesData));
                 sessionStorage.setItem("lastQuery", query);
             } else {
-                console.log("error hennna")
+
                 results.innerHTML = `<div class="empty-state"><p>${data.message}</p></div>`;
             }
         },
         error: function (xhr) {
-            console.log("ana henna2")
+
             console.error(xhr.responseText);
             results.innerHTML = `<div class="empty-state"><p>Connection error. Please try again.</p></div>`;
         },
