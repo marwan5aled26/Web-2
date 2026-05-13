@@ -16,5 +16,5 @@ class Movie extends Model
     protected $fillable = ['id', 'title', 'year', 'rating', 'note', 'poster'];
 
     protected $casts = ['rating' => 'float'];
-    
+
 }
