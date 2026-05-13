@@ -55,7 +55,7 @@ function searchMovie() {
     `;
 
     $.ajax({
-        url: "API_Ops.php",
+        url: "/search-movie",
         method: "POST",
         dataType: "json",
         data: {

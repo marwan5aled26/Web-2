@@ -17,7 +17,7 @@ function addToWatchlist(imdbId) {
         : btn.closest(".card").querySelector(".card-poster").src;
 
     $.ajax({
-        url: "DB_Ops.php", method: "POST", dataType: "json",
+        url: "/add-movie", method: "POST", dataType: "json",
         data: { action: "add", id: imdbId, title: title, year: year, rating: 0, note: "", poster: poster },
         success: function(data) {
             if (data.status === "success") {
@@ -44,8 +44,7 @@ function addToWatchlist(imdbId) {
 function deleteMovie(id) {
     if (!confirm("Remove this movie from your watchlist?")) return;
     $.ajax({
-        url: "DB_Ops.php", method: "POST", dataType: "json",
-        data: { action: "delete", id: id },
+        url: "/delete-movie/" + id, method: "DELETE", dataType: "json",
         success: function(data) {
             if (data.status === "success") {
                 showToast("Movie removed.", "info");
@@ -61,8 +60,7 @@ function deleteMovie(id) {
 
 function loadWatchlist() {
     $.ajax({
-        url: "DB_Ops.php", method: "POST", dataType: "json",
-        data: { action: "get" },
+        url: "/get-movies", method: "GET", dataType: "json",
         success: function(data) {
             if (data.status !== "success") return showToast("Failed to load watchlist.", "error");
             const movies = data.data;
@@ -111,8 +109,7 @@ function toggleNote(id, btn) {
 
 function updateButtonsFromWatchlist() {
     $.ajax({
-        url: "DB_Ops.php", method: "POST", dataType: "json",
-        data: { action: "get" },
+        url: "/get-movies", method: "GET", dataType: "json",
         success: function(data) {
             if (data.status === "success") {
                 data.data.forEach(movie => {
@@ -163,8 +160,8 @@ function saveEdit() {
     ratingError.classList.add("hidden");
     
     $.ajax({
-        url: "DB_Ops.php", method: "POST", dataType: "json",
-        data: { action: "update", id: id, rating: rating, note: note },
+        url: "/update-movie/" + id, method: "PUT", dataType: "json",
+        data: { rating: rating, note: note },
         success: function(data) {
             if (data.status === "success") {
                 showToast("Movie updated! ✨", "success");
