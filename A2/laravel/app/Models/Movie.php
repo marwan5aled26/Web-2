@@ -9,6 +9,7 @@ class Movie extends Model
 {
     use HasFactory;
 
+    protected $table = 'movie_laravel';
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';

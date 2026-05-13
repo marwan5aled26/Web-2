@@ -25,6 +25,8 @@ function closeOverlay(event) {
 }
 
 function searchMovie() {
+
+    console.log("ana henna5")
     window.location.hash = "";
     const searchInput = document.getElementById("searchInput");
     const query = searchInput.value.trim();
@@ -40,11 +42,12 @@ function searchMovie() {
     results.innerHTML = `<div class="loading"><div class="loading-spinner"></div><p class="loading-text">Searching the archives...</p></div>`;
 
     $.ajax({
-        url: "/search-movie",
-        method: "POST",
+        url: "/searchMovie",
+        method: "Get",
         dataType: "json",
         data: { query: query },
         success: function (data) {
+            console.log("Done");
             if (data.status === "success") {
                 globalMoviesData = data.movies;
                 let resultsHTML = "";
@@ -79,10 +82,12 @@ function searchMovie() {
                 sessionStorage.setItem("lastMoviesData", JSON.stringify(globalMoviesData));
                 sessionStorage.setItem("lastQuery", query);
             } else {
+                console.log("error hennna")
                 results.innerHTML = `<div class="empty-state"><p>${data.message}</p></div>`;
             }
         },
         error: function (xhr) {
+            console.log("ana henna2")
             console.error(xhr.responseText);
             results.innerHTML = `<div class="empty-state"><p>Connection error. Please try again.</p></div>`;
         },

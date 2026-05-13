@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('movies_laravel', function (Blueprint $table) {
-            $table->string('id', 20)->primary(); // ttxxxxx or custom id
+            $table->string('id', 20)->primary();
             $table->string('title', 255);
             $table->string('year', 10)->nullable();
             $table->float('rating')->nullable();
