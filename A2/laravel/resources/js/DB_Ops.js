@@ -60,7 +60,7 @@ function loadWatchlist() {
         method: "GET",
         dataType: "json",
         success: function(data) {
-            if (data.status !== "success") return showToast("Failed to load watchlist.", "error");
+            if (data.status !== "success") return showToast(data.message, "error");
             const movies = data.data;
             const container = document.getElementById("myList");
             document.getElementById("listCount").textContent = movies.length ? `(${movies.length})` : "";
@@ -94,6 +94,7 @@ function loadWatchlist() {
                 </div>`;
             }).join('');
         }
+        
     });
 }
 
@@ -294,6 +295,7 @@ function addMovieToDatabase(id, title, year, rating, note, poster) {
 
 function showToast(msg, type = "info") {
     const toast = document.getElementById("toast");
+    if (!toast) return;
     toast.textContent = msg;
     toast.className = `toast toast-${type} show`;
     setTimeout(() => toast.className = "toast", 3000);
@@ -304,7 +306,6 @@ function hideLoader() { document.getElementById('loader').classList.add('hidden'
 
 document.addEventListener("DOMContentLoaded", function() {
     loadWatchlist();
-    
     const lastResults = sessionStorage.getItem("lastResults");
     const lastMoviesData = sessionStorage.getItem("lastMoviesData");
     

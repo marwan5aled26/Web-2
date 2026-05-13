@@ -46,7 +46,7 @@ class MovieController extends Controller
 
     public function getMovies()
     {
-        $movies = Movie::orderBy('id', 'desc')->get();
+        $movies = Movie::all();
         return response()->json(['status' => 'success', 'data' => $movies]);
     }
     public function addMovie(StoreMovieRequest $request)

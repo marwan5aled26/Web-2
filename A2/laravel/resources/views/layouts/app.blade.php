@@ -18,6 +18,8 @@
 
     @include('partials.footer')
 
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $.ajaxSetup({

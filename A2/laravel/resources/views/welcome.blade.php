@@ -29,16 +29,16 @@
     </section>
 
     <section id="myListSection" class="mylist-section">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-icon">🎬</span>
-                My Watchlist
-                <span class="results-count" id="listCount"></span>
-            </h2>
-            <div class="grid" id="myList">
-                <div class="empty-state" id="emptyState">
-                    <div class="empty-icon">🎞️</div>
-                    <p>Your watchlist is empty.<br>Search for a movie and add it!</p>
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-icon">🎬</span>
+            My Watchlist
+            <span class="results-count" id="listCount"></span>
+        </h2>
+        <div class="grid" id="myList">
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">🎞️</div>
+                <p>Your watchlist is empty.<br>Search for a movie and add it!</p>
                 </div>
             </div>
         </div>
