@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎬 Movie Tracker</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="{{ url('resources/css/style.css') }}">
 </head>
 
 <body>
@@ -26,8 +26,8 @@
             }
         });
     </script>
-    <script src="{{ asset('API_Ops.js') }}"></script>
-    <script src="{{ asset('DB_Ops.js') }}"></script>
+    <script src="{{ url('resources/js/API_Ops.js') }}"></script>
+    <script src="{{ url('resources/js/DB_Ops.js') }}"></script>
 
 </body>
 </html>

@@ -1,15 +1,3 @@
-<!-- HTML HEAD & HEADER NAVIGATION -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-    <title>🎬 Movie Tracker</title>
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
-</head>
-<body>
-
 <header class="site-header">
     <div class="container header-inner">
         <div class="logo">
