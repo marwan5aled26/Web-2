@@ -12,16 +12,15 @@ class MovieController extends Controller
 {
     public function index()
     {
-        return view('index');
+        return view('welcome');
     }
 
-    public function get_movies()
+    public function getMovies()
     {
-        $movies = Movie::orderBy('created_at', 'desc')->get();
+        $movies = Movie::orderBy('id', 'desc')->get();
         return response()->json(['status' => 'success', 'data' => $movies]);
     }
-
-    public function store(StoreMovieRequest $request)
+    public function addMovie(StoreMovieRequest $request)
     {
         $validated = $request->validated();
 
@@ -36,7 +35,7 @@ class MovieController extends Controller
         return response()->json(['status' => 'success', 'data' => $validated]);
     }
 
-    public function update(UpdateMovieRequest $request, $id)
+    public function updateMovie(UpdateMovieRequest $request, $id)
     {
         $validated = $request->validated();
 
