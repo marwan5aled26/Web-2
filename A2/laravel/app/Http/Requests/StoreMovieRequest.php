@@ -4,10 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Unique;
-use Illuminate\Validation\Rules\Regex;
-use Illuminate\Validation\Rules\Required;
-use Illuminate\Validation\Rules\StringType;
 
 class StoreMovieRequest extends FormRequest
 {
