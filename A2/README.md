@@ -101,54 +101,46 @@ Coming Soon
 1. Pull the project from Repo  
 
 2. Enter project directory:
-    
 `cd Web 2/A2/laravel`
 
 4. Install dependencies:
-   
 `composer install`
 
-5. Copy environment file:
-     
+5. Copy environment file:  
 `cp .env.example .env`
 
 6. Generate application key:
- 
 `php artisan key:generate`
 
 8. Edit .env:
 
-For using SQLite:
+    For using SQLite:
+    
+    DB_CONNECTION=sqlite
+    
+    DB_DATABASE=database/database.sqlite
+    
+    <br/>
+    For using MySQL:
+    
+    DB_CONNECTION=mysql
+    
+    DB_DATABASE=movie_app
+    
+    <br/>
+    Add API Key & URL:
+    
+    API_KEY=daeab9a1
 
-DB_CONNECTION=sqlite
-
-DB_DATABASE=database/database.sqlite
-
-
-For using MySQL:
-
-DB_CONNECTION=mysql
-
-DB_DATABASE=movie_app
-
-
-Add API Key & URL:
-
-API_KEY=daeab9a1
-
-API_URL=http://www.omdbapi.com/
-
+    API_URL=http://www.omdbapi.com/
 
 7. Run migrations:  
-
 `php artisan migrate`
 
 8. Insert initial data:  
-
 `php artisan db:seed`
 
-9. Start development server:  
-
+9. Start development server:
 `php artisan serve`
 
 ---
