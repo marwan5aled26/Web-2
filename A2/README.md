@@ -103,15 +103,19 @@ Coming Soon
 4. Copy environment file: cp .env.example .env
 5. Generate application key: php artisan key:generate
 6. Edit .env:
-** For using SQLite **
+
+**For using SQLite:**
+
 DB_CONNECTION=sqlite
 DB_DATABASE=database/database.sqlite
 
-** For using MySQL **
+**For using MySQL:**
+
 DB_CONNECTION=sqlite
 DB_DATABASE=database/database.sqlite
 
-** Add API Key & URL **
+**Add API Key & URL:**
+
 API_KEY=daeab9a1
 API_URL=http://www.omdbapi.com/
 
