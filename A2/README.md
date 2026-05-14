@@ -104,20 +104,23 @@ Coming Soon
 5. Generate application key: php artisan key:generate
 6. Edit .env:
 
-**For using SQLite:**
-
-DB_CONNECTION=sqlite
-DB_DATABASE=database/database.sqlite
-
-**For using MySQL:**
-
-DB_CONNECTION=sqlite
-DB_DATABASE=database/database.sqlite
-
-**Add API Key & URL:**
-
-API_KEY=daeab9a1
-API_URL=http://www.omdbapi.com/
+  **For using SQLite:**
+  
+  DB_CONNECTION=sqlite
+  
+  DB_DATABASE=database/database.sqlite
+  
+  **For using MySQL:**
+  
+  DB_CONNECTION=sqlite
+  
+  DB_DATABASE=database/database.sqlite
+  
+  **Add API Key & URL:**
+  
+  API_KEY=daeab9a1
+  
+  API_URL=http://www.omdbapi.com/
 
 7. Run migrations: php artisan migrate
 8. Insert intial data: php artisan db:seed
