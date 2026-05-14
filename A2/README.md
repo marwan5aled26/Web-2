@@ -29,30 +29,30 @@ Coming Soon
 
 ### File Structure
 
-| File | Job |
-|------|-----|
-| `app/Http/Controllers/Controller.php` | CRUD operations (add, edit, delete, view) |
-| `app/Http/Controllers/MovieController.php` | CRUD operations (add, edit, delete, view) |
-| `app/Http/Requests/SearchMovieRequest.php` | Server-side validation rules |
-| `app/Http/Requests/StoreMovieRequest.php` | Server-side validation rules |
-| `app/Http/Requests/UpdateMovieRequest.php` | Server-side validation rules |
-| `app/Http/Requests/UploadPosterRequest.php` | Server-side validation rules |
-| `app/Models/Movie.php` | Eloquent model for database |
-| `app/Providers/AppServiceProvider.php` | API service layer (hides API key logic) |
-| `database/migrations/create_movies_laravel_table.php` | Database schema setup |
-| `database/seeders/MoviesSeeder.php` | Database schema setup |
-| `database/database.sqlite` | SQLite database file |
-| `resources/css/style.css` | All colors & designs (ported from A1) |
-| `resources/js/API_Ops.js` | All colors & designs (ported from A1) |
-| `resources/js/DB_Ops.js` | All colors & designs (ported from A1) |
-| `resources/views/layouts/app.blade.php` | Master layout (header + footer) |
-| `resources/views/partials/header.blade.php` | Top navigation bar |
-| `resources/views/partials/footer.blade.php` | Bottom credits |
-| `resources/views/welcome.blade.php` | Homepage with search |
-| `routes/web.php` | All application routes |
-| `tests/Feature/MovieTest.php` | Feature tests (end-to-end) |
-| `tests/Unit/MovieUnitTest.php` | Unit tests (isolated logic) |
-| `.env` | API keys & environment config |
+| Section | File | Responsibility |
+|---|---|---|
+| **Application Structure** | `app/Http/Controllers/Controller.php` | Base controller class used by all controllers |
+|  | `app/Http/Controllers/MovieController.php` | Handles Movie CRUD operations (create, read, update, delete) |
+|  | `app/Http/Requests/SearchMovieRequest.php` | Validation rules for movie search requests |
+|  | `app/Http/Requests/StoreMovieRequest.php` | Validation rules for storing new movies |
+|  | `app/Http/Requests/UpdateMovieRequest.php` | Validation rules for updating existing movies |
+|  | `app/Http/Requests/UploadPosterRequest.php` | Validation rules for poster image uploads |
+|  | `app/Models/Movie.php` | Eloquent model representing the movies table |
+|  | `app/Providers/AppServiceProvider.php` | Service layer setup and API integration (hides API key logic) |
+| **Database Layer** | `database/migrations/create_movies_laravel_table.php` | Creates database schema for movies table |
+|  | `database/seeders/MoviesSeeder.php` | Seeds sample movie records into database |
+|  | `database/database.sqlite` | SQLite database file used for local development/testing |
+| **Frontend Assets** | `resources/css/style.css` | Main styling, colors, and UI design (ported from Assignment 1) |
+|  | `resources/js/API_Ops.js` | Frontend API interaction logic |
+|  | `resources/js/DB_Ops.js` | Frontend database interaction logic |
+| **Blade Views** | `resources/views/layouts/app.blade.php` | Main master layout containing shared structure |
+|  | `resources/views/partials/header.blade.php` | Header and top navigation bar |
+|  | `resources/views/partials/footer.blade.php` | Footer and credits section |
+|  | `resources/views/welcome.blade.php` | Homepage containing movie search and main UI |
+| **Routes** | `routes/web.php` | Defines all web application routes |
+| **Testing** | `tests/Feature/MovieTest.php` | Feature tests for full HTTP request lifecycle |
+|  | `tests/Unit/MovieUnitTest.php` | Unit tests for isolated business logic and validation |
+| **Configuration** | `.env` | Environment configuration and API keys |
 
 ### Routes
 
