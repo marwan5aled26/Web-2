@@ -2,10 +2,14 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use App\Models\Movie;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-// UNIT TEST 1
-  
+class ExampleTest extends TestCase
+{
+    use RefreshDatabase;
+
     public function test_add_movie_fails_when_id_already_exists(): void
     {
         Movie::create([
@@ -16,18 +20,15 @@ use PHPUnit\Framework\TestCase;
             'note'   => '',
             'poster' => 'https://via.placeholder.com/300x450',
         ]);
- 
+
         $response = $this->postJson('/add-movie', [
             'id'    => 'tt9999999',
             'title' => 'Duplicate Movie',
         ]);
- 
+
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['id']);
     }
- 
-
-    // UNIT TEST 2
 
     public function test_add_movie_fails_when_title_is_missing(): void
     {
@@ -36,12 +37,10 @@ use PHPUnit\Framework\TestCase;
             'year'   => 2020,
             'rating' => 7.0,
         ]);
- 
+
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['title']);
     }
- 
-    // UNIT TEST 3
 
     public function test_update_movie_fails_when_rating_out_of_range(): void
     {
@@ -53,17 +52,15 @@ use PHPUnit\Framework\TestCase;
             'note'   => '',
             'poster' => 'https://via.placeholder.com/300x450',
         ]);
- 
+
         $response = $this->putJson('/update-movie/tt1111111', [
             'rating' => 15,
             'note'   => 'Updated note',
         ]);
- 
+
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['rating']);
     }
- 
-    // UNIT TEST 4
 
     public function test_add_movie_fails_when_year_is_invalid(): void
     {
@@ -72,7 +69,7 @@ use PHPUnit\Framework\TestCase;
             'title' => 'Old Movie',
             'year'  => 1800,
         ]);
- 
+
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['year']);
     }
