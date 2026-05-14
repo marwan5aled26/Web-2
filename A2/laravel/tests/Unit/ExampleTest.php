@@ -20,12 +20,10 @@ class ExampleTest extends TestCase
             'note'   => '',
             'poster' => 'https://via.placeholder.com/300x450',
         ]);
-
         $response = $this->postJson('/add-movie', [
             'id'    => 'tt9999999',
             'title' => 'Duplicate Movie',
         ]);
-
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['id']);
     }
@@ -37,7 +35,6 @@ class ExampleTest extends TestCase
             'year'   => 2020,
             'rating' => 7.0,
         ]);
-
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['title']);
     }
@@ -52,12 +49,10 @@ class ExampleTest extends TestCase
             'note'   => '',
             'poster' => 'https://via.placeholder.com/300x450',
         ]);
-
         $response = $this->putJson('/update-movie/tt1111111', [
             'rating' => 15,
             'note'   => 'Updated note',
         ]);
-
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['rating']);
     }
@@ -69,7 +64,6 @@ class ExampleTest extends TestCase
             'title' => 'Old Movie',
             'year'  => 1800,
         ]);
-
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['year']);
     }
