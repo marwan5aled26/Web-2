@@ -25,7 +25,6 @@ function closeOverlay(event) {
 }
 
 function searchMovie() {
-
     console.log("ana henna5")
     window.location.hash = "";
     const searchInput = document.getElementById("searchInput");
@@ -46,63 +45,59 @@ function searchMovie() {
         method: "GET",
         dataType: "json",
         data: { query: query },
-        success: function (data) {
-            if (data.status === "success") {
-                globalMoviesData = data.movies;
-                let resultsHTML = "";
+        success: function (searchData) {
+            if (searchData.status === "success") {
+                globalMoviesData = searchData.movies;
 
-                data.movies.forEach((movie) => {
-                    let poster = movie.poster === "N/A" || !movie.poster ? "https://via.placeholder.com/300x450?text=No+Image" : movie.poster;
-                    const imdbRating = movie.detailed ? movie.detailed.imdbRating : "N/A";
-                    const plot = movie.detailed ? movie.detailed.Plot : "No plot available.";
+                $.ajax({
+                    url: "/get-movies",
+                    method: "GET",
+                    dataType: "json",
+                    success: function (watchlistData) {
+                        const watchlistIds = watchlistData.status === "success" ? watchlistData.data.map(m => m.id) : [];
+                        let resultsHTML = "";
 
-                    resultsHTML += `<div class="card">
-                        <div class="card-poster-wrap" onclick="showMovieDetails('${movie.id}')" style="cursor:pointer">
-                            <img src="${poster}" alt="${movie.title}" class="card-poster" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
-                            ${imdbRating !== "N/A" ? `<div class="poster-score"><span class="score-star">★</span><span>${imdbRating}</span></div>` : ""}
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">${movie.title}</h3>
-                            <div class="card-meta"><span class="movie-year">${movie.year}</span></div>
-                            <div class="genre-tags">
-                                ${movie.detailed && movie.detailed.Genre ? movie.detailed.Genre.split(",").slice(0,3).map((genre) => `<span class="genre-tag">${genre.trim()}</span>`).join("") : `<span class="genre-tag">Unknown</span>`}
-                            </div>
-                            <p class="card-note" id="plot-${movie.id}">${plot}</p>
-                            ${plot.length > 120 ? `<button class="show-more-btn" onclick="togglePlot('${movie.id}', this)">Show More</button>` : ""}
-                        </div>
-                        <div class="card-actions">
-                            <button class="btn btn-add" id="btn-${movie.id}" onclick="addToWatchlist('${movie.id}')">Add to Watchlist</button>
-                        </div>
-                    </div>`;
+                        searchData.movies.forEach((movie) => {
+                            let poster = movie.poster === "N/A" || !movie.poster ? "https://via.placeholder.com/300x450?text=No+Image" : movie.poster;
+                            const imdbRating = movie.detailed ? movie.detailed.imdbRating : "N/A";
+                            const plot = movie.detailed ? movie.detailed.Plot : "No plot available.";
 
+                            const isAdded = watchlistIds.includes(movie.id);
+                            const btnText = isAdded ? "✓ Added" : "Add to Watchlist";
+                            const btnClass = isAdded ? "btn btn-add is-added" : "btn btn-add";
+                            const btnDisabled = isAdded ? "disabled" : "";
+
+                            resultsHTML += `<div class="card">
+                                <div class="card-poster-wrap" onclick="showMovieDetails('${movie.id}')" style="cursor:pointer">
+                                    <img src="${poster}" alt="${movie.title}" class="card-poster" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
+                                    ${imdbRating !== "N/A" ? `<div class="poster-score"><span class="score-star">★</span><span>${imdbRating}</span></div>` : ""}
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-title">${movie.title}</h3>
+                                    <div class="card-meta"><span class="movie-year">${movie.year}</span></div>
+                                    <div class="genre-tags">
+                                        ${movie.detailed && movie.detailed.Genre ? movie.detailed.Genre.split(",").slice(0,3).map((genre) => `<span class="genre-tag">${genre.trim()}</span>`).join("") : `<span class="genre-tag">Unknown</span>`}
+                                    </div>
+                                    <p class="card-note" id="plot-${movie.id}">${plot}</p>
+                                    ${plot.length > 120 ? `<button class="show-more-btn" onclick="togglePlot('${movie.id}', this)">Show More</button>` : ""}
+                                </div>
+                                <div class="card-actions">
+                                    <button class="${btnClass}" id="btn-${movie.id}" onclick="addToWatchlist('${movie.id}')" ${btnDisabled}>${btnText}</button>
+                                </div>
+                            </div>`;
+                        });
+
+                        results.innerHTML = resultsHTML;
+                        sessionStorage.setItem("lastResults", resultsHTML);
+                        sessionStorage.setItem("lastMoviesData", JSON.stringify(globalMoviesData));
+                        sessionStorage.setItem("lastQuery", query);
+                    }
                 });
-                 $.ajax({
-                        url: "/get-movies",
-                        method: "GET",
-                        dataType: "json",
-                        success: function (data) {
-                            const watchlistIds = data.data.map(movie => movie.id)
-                            if (watchlistIds.includes(movie.id)) {
-                                const btn = document.getElementById(`btn-${movie.id}`);
-                                if (btn) {
-                                    btn.disabled = true;
-                                    btn.textContent = "✓ Added";
-                                    btn.classList.add("is-added");
-                                }
-                            }
-                    }});
-
-                results.innerHTML = resultsHTML;
-                sessionStorage.setItem("lastResults", resultsHTML);
-                sessionStorage.setItem("lastMoviesData", JSON.stringify(globalMoviesData));
-                sessionStorage.setItem("lastQuery", query);
             } else {
-
-                results.innerHTML = `<div class="empty-state"><p>${data.message}</p></div>`;
+                results.innerHTML = `<div class="empty-state"><p>${searchData.message}</p></div>`;
             }
         },
         error: function (xhr) {
-
             console.error(xhr.responseText);
             results.innerHTML = `<div class="empty-state"><p>Connection error. Please try again.</p></div>`;
         },
@@ -135,7 +130,7 @@ function showMovieDetails(id) {
         dataType: "json",
         success: function (data) {
             if (data.status === "success") {
-                const watchlistIds = data.data.map(movie => movie.id);
+                const watchlistIds = data.data.map(m => m.id);
                 if (watchlistIds.includes(id)) {
                     const overlayBtn = document.getElementById("overlay-add-btn");
                     if (overlayBtn) {
@@ -147,19 +142,4 @@ function showMovieDetails(id) {
             }
         }
     });
-     $.ajax({
-            url: "/get-movies",
-            method: "GET",
-            dataType: "json",
-            success: function (data) {
-                const watchlistIds = data.data.map(movie => movie.id)
-                if (watchlistIds.includes(movie.id)) {
-                    const btn = document.getElementById(`btn-${movie.id}`);
-                    if (btn) {
-                        btn.disabled = true;
-                        btn.textContent = "✓ Added";
-                        btn.classList.add("is-added");
-                    }
-                }
-        }});
 }
