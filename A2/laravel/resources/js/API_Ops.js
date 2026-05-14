@@ -74,7 +74,23 @@ function searchMovie() {
                             <button class="btn btn-add" id="btn-${movie.id}" onclick="addToWatchlist('${movie.id}')">Add to Watchlist</button>
                         </div>
                     </div>`;
+
                 });
+                 $.ajax({
+                        url: "/get-movies",
+                        method: "GET",
+                        dataType: "json",
+                        success: function (data) {
+                            const watchlistIds = data.data.map(movie => movie.id)
+                            if (watchlistIds.includes(movie.id)) {
+                                const btn = document.getElementById(`btn-${movie.id}`);
+                                if (btn) {
+                                    btn.disabled = true;
+                                    btn.textContent = "✓ Added";
+                                    btn.classList.add("is-added");
+                                }
+                            }
+                    }});
 
                 results.innerHTML = resultsHTML;
                 sessionStorage.setItem("lastResults", resultsHTML);
@@ -131,4 +147,19 @@ function showMovieDetails(id) {
             }
         }
     });
+     $.ajax({
+            url: "/get-movies",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                const watchlistIds = data.data.map(movie => movie.id)
+                if (watchlistIds.includes(movie.id)) {
+                    const btn = document.getElementById(`btn-${movie.id}`);
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.textContent = "✓ Added";
+                        btn.classList.add("is-added");
+                    }
+                }
+        }});
 }

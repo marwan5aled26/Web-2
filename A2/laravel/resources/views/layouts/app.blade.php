@@ -6,6 +6,16 @@
     <title>🎬 Movie Tracker</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ url('resources/css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script defer src="{{ url('resources/js/API_Ops.js') }}"></script>
+    <script defer src="{{ url('resources/js/DB_Ops.js') }}"></script>
 </head>
 
 <body>
@@ -18,25 +28,9 @@
 
     @include('partials.footer')
 
-    <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
 
-    <div id="movieOverlay" class="modal-overlay hidden" onclick="closeOverlay(event)">
-    <div class="modal-content movie-detail-modal">
-        <button class="close-btn" onclick="this.closest('.modal-overlay').classList.add('hidden')">&times;</button>
-        <div id="overlayBody"></div>
-    </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
-    <script src="{{ url('resources/js/API_Ops.js') }}"></script>
-    <script src="{{ url('resources/js/DB_Ops.js') }}"></script>
+    
 
 </body>
 </html>
