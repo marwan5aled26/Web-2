@@ -31,35 +31,39 @@ Coming Soon
 
 | File | Job |
 |------|-----|
+| `app/Http/Controllers/Controller.php` | CRUD operations (add, edit, delete, view) |
 | `app/Http/Controllers/MovieController.php` | CRUD operations (add, edit, delete, view) |
-| `app/Http/Controllers/ApiController.php` | OMDb API calls (search movies) |
-| `app/Http/Requests/MovieRequest.php` | Server-side validation rules |
+| `app/Http/Requests/SearchMovieRequest.php` | Server-side validation rules |
+| `app/Http/Requests/StoreMovieRequest.php` | Server-side validation rules |
+| `app/Http/Requests/UpdateMovieRequest.php` | Server-side validation rules |
+| `app/Http/Requests/UploadPosterRequest.php` | Server-side validation rules |
 | `app/Models/Movie.php` | Eloquent model for database |
-| `app/Services/OmdbService.php` | API service layer (hides API key logic) |
-| `database/migrations/create_movies_table.php` | Database schema setup |
+| `app/Providers/AppServiceProvider.php` | API service layer (hides API key logic) |
+| `database/migrations/create_movies_laravel_table.php` | Database schema setup |
+| `database/seeders/MoviesSeeder.php` | Database schema setup |
 | `database/database.sqlite` | SQLite database file |
+| `resources/css/style.css` | All colors & designs (ported from A1) |
+| `resources/js/API_Ops.js` | All colors & designs (ported from A1) |
+| `resources/js/DB_Ops.js` | All colors & designs (ported from A1) |
 | `resources/views/layouts/app.blade.php` | Master layout (header + footer) |
-| `resources/views/welcome.blade.php` | Homepage with search |
-| `resources/views/watchlist.blade.php` | Watchlist display page |
 | `resources/views/partials/header.blade.php` | Top navigation bar |
 | `resources/views/partials/footer.blade.php` | Bottom credits |
+| `resources/views/welcome.blade.php` | Homepage with search |
 | `routes/web.php` | All application routes |
-| `public/css/style.css` | All colors & designs (ported from A1) |
 | `tests/Feature/MovieTest.php` | Feature tests (end-to-end) |
 | `tests/Unit/MovieUnitTest.php` | Unit tests (isolated logic) |
 | `.env` | API keys & environment config |
-| `Team_Members.txt` | Team information |
 
 ### Routes
 
 | Method | URI | Description |
 |--------|-----|-------------|
-| GET | / | Homepage |
-| GET | /watchlist | View all saved movies |
-| POST | /movies | Add movie to watchlist |
-| PUT | /movies/{id} | Update rating/note |
-| DELETE | /movies/{id} | Remove from watchlist |
-| GET | /api/search | Search OMDb API |
+| GET | / | index |
+| GET | /get-movies | View all saved movies |
+| POST | /add-movie | Add movie to watchlist |
+| PUT | /update-movie/{id} | Update rating/note |
+| DELETE | /delete-movie/{id} | Remove from watchlist |
+| GET | /searchMovie | Search for a movie |
 
 ### Tech Stack
 
