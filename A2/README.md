@@ -92,25 +92,32 @@ Coming Soon
 
 - PHP 8.1 or higher
 - Composer
+- Laravel
 
 ### Installation Steps
 
-1. Enter project directory: cd Assignment-2
-2. Install dependencies: composer install
-3. Copy environment file: cp .env.example .env
-4. Generate application key: php artisan key:generate
-5. Configure .env for SQLite (set DB_CONNECTION=sqlite)
-6. Create SQLite database file: touch database/database.sqlite
-7. Run migrations: php artisan migrate
-8. Start development server: php artisan serve
-
-### Environment Configuration (.env)
-
-APP_NAME=MovieTracker
-APP_ENV=local
-APP_DEBUG=true
+1. Pull the project from Repo
+** Use Terminal in VS Code **
+2. Enter project directory: cd Web 2/A2/laravel
+3. Install dependencies: composer install
+4. Copy environment file: cp .env.example .env
+5. Generate application key: php artisan key:generate
+6. Edit .env:
+** For using SQLite **
 DB_CONNECTION=sqlite
-OMDB_API_KEY=your_api_key_here
+DB_DATABASE=database/database.sqlite
+
+** For using MySQL **
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+
+** Add API Key & URL **
+API_KEY=daeab9a1
+API_URL=http://www.omdbapi.com/
+
+7. Run migrations: php artisan migrate
+8. Insert intial data: php artisan db:seed
+9. Start development server: php artisan serve
 
 ---
 
