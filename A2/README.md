@@ -96,24 +96,27 @@ Coming Soon
 
 ### Installation Steps
 
-1. Pull the project from Repo  
 **Use Terminal in VS Code**
-
-2. Enter project directory:  
-cd Web 2/A2/laravel
-
-3. Install dependencies:  
-composer install
-
-4. Copy environment file:  
-cp .env.example .env
-
-5. Generate application key:  
+<br/>
+1. Pull the project from Repo  
+<br/>
+2. Enter project directory:
+    
+`cd Web 2/A2/laravel`
+<br/>
+4. Install dependencies:
+   
+`composer install`
+<br/>
+5. Copy environment file:
+     
+`cp .env.example .env`
+<br/>
+6. Generate application key:  
 php artisan key:generate
 
-6. Edit .env:
-
-
+7. Edit .env:
+<br/>
 For using SQLite:
 
 
