@@ -128,7 +128,7 @@ Coming Soon
     <br/>
     **Add API Key & URL:**
     
-    API_KEY=daeab9a1
+    API_KEY=daeab9a1<br/>
     API_URL=http://www.omdbapi.com/
 
 7. Run migrations:  
