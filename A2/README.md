@@ -109,12 +109,14 @@ Coming Soon
      DB_CONNECTION=sqlite
      
      DB_DATABASE=database/database.sqlite
+   
      
      **For using MySQL:**
      
      DB_CONNECTION=sqlite
      
      DB_DATABASE=database/database.sqlite
+   
      
      **Add API Key & URL:**
      
@@ -122,9 +124,9 @@ Coming Soon
      
      API_URL=http://www.omdbapi.com/
 
-7. Run migrations: php artisan migrate
-8. Insert intial data: php artisan db:seed
-9. Start development server: php artisan serve
+8. Run migrations: php artisan migrate
+9. Insert intial data: php artisan db:seed
+10. Start development server: php artisan serve
 
 ---
 
