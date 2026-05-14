@@ -29,37 +29,42 @@ Coming Soon
 
 ### File Structure
 
-| File | Job |
-|------|-----|
-| `app/Http/Controllers/MovieController.php` | CRUD operations (add, edit, delete, view) |
-| `app/Http/Controllers/ApiController.php` | OMDb API calls (search movies) |
-| `app/Http/Requests/MovieRequest.php` | Server-side validation rules |
-| `app/Models/Movie.php` | Eloquent model for database |
-| `app/Services/OmdbService.php` | API service layer (hides API key logic) |
-| `database/migrations/create_movies_table.php` | Database schema setup |
-| `database/database.sqlite` | SQLite database file |
-| `resources/views/layouts/app.blade.php` | Master layout (header + footer) |
-| `resources/views/welcome.blade.php` | Homepage with search |
-| `resources/views/watchlist.blade.php` | Watchlist display page |
-| `resources/views/partials/header.blade.php` | Top navigation bar |
-| `resources/views/partials/footer.blade.php` | Bottom credits |
-| `routes/web.php` | All application routes |
-| `public/css/style.css` | All colors & designs (ported from A1) |
-| `tests/Feature/MovieTest.php` | Feature tests (end-to-end) |
-| `tests/Unit/MovieUnitTest.php` | Unit tests (isolated logic) |
-| `.env` | API keys & environment config |
-| `Team_Members.txt` | Team information |
+| Section | File | Responsibility |
+|---|---|---|
+| **Application Structure** | `app/Http/Controllers/Controller.php` | Base controller class used by all controllers |
+|  | `app/Http/Controllers/MovieController.php` | Handles Movie CRUD operations (create, read, update, delete) |
+|  | `app/Http/Requests/SearchMovieRequest.php` | Validation rules for movie search requests |
+|  | `app/Http/Requests/StoreMovieRequest.php` | Validation rules for storing new movies |
+|  | `app/Http/Requests/UpdateMovieRequest.php` | Validation rules for updating existing movies |
+|  | `app/Http/Requests/UploadPosterRequest.php` | Validation rules for poster image uploads |
+|  | `app/Models/Movie.php` | Eloquent model representing the movies table |
+|  | `app/Providers/AppServiceProvider.php` | Service layer setup and API integration (hides API key logic) |
+| **Database Layer** | `database/migrations/create_movies_laravel_table.php` | Creates database schema for movies table |
+|  | `database/seeders/MoviesSeeder.php` | Seeds sample movie records into database |
+|  | `database/database.sqlite` | SQLite database file used for local development/testing |
+| **Frontend Assets** | `resources/css/style.css` | Main styling, colors, and UI design (ported from Assignment 1) |
+|  | `resources/js/API_Ops.js` | Frontend API interaction logic |
+|  | `resources/js/DB_Ops.js` | Frontend database interaction logic |
+| **Blade Views** | `resources/views/layouts/app.blade.php` | Main master layout containing shared structure |
+|  | `resources/views/partials/header.blade.php` | Header and top navigation bar |
+|  | `resources/views/partials/footer.blade.php` | Footer and credits section |
+|  | `resources/views/welcome.blade.php` | Homepage containing movie search and main UI |
+| **Routes** | `routes/web.php` | Defines all web application routes |
+| **Testing** | `tests/Feature/MovieTest.php` | Feature tests for full HTTP request lifecycle |
+|  | `tests/Unit/MovieUnitTest.php` | Unit tests for isolated business logic and validation |
+| **Configuration** | `.env` | Environment configuration and API keys |
 
 ### Routes
 
 | Method | URI | Description |
 |--------|-----|-------------|
-| GET | / | Homepage |
-| GET | /watchlist | View all saved movies |
-| POST | /movies | Add movie to watchlist |
-| PUT | /movies/{id} | Update rating/note |
-| DELETE | /movies/{id} | Remove from watchlist |
-| GET | /api/search | Search OMDb API |
+| GET | / | index |
+| GET | /get-movies | View all saved movies |
+| POST | /add-movie | Add movie to watchlist |
+| PUT | /update-movie/{id} | Update rating/note |
+| DELETE | /delete-movie/{id} | Remove from watchlist |
+| POST | /upload-poster | Upload posters for adding movies |
+| GET | /searchMovie | Search for a movie |
 
 ### Tech Stack
 
@@ -88,25 +93,47 @@ Coming Soon
 
 - PHP 8.1 or higher
 - Composer
+- Laravel
 
 ### Installation Steps
 
-1. Enter project directory: cd Assignment-2
-2. Install dependencies: composer install
-3. Copy environment file: cp .env.example .env
-4. Generate application key: php artisan key:generate
-5. Configure .env for SQLite (set DB_CONNECTION=sqlite)
-6. Create SQLite database file: touch database/database.sqlite
-7. Run migrations: php artisan migrate
-8. Start development server: php artisan serve
+**Use Terminal in VS Code**
 
-### Environment Configuration (.env)
+1. Pull the project from Repo  
 
-APP_NAME=MovieTracker
-APP_ENV=local
-APP_DEBUG=true
-DB_CONNECTION=sqlite
-OMDB_API_KEY=your_api_key_here
+2. Enter project directory: <br/>
+`cd Web 2/A2/laravel`
+
+4. Install dependencies: <br/>
+`composer install`
+
+5. Copy environment file: <br/>
+`cp .env.example .env`
+
+6. Generate application key: <br/>
+`php artisan key:generate`
+
+8. Edit your .env file: <br/>
+   **-For using SQLite: (Replacing)** <br/> 
+    DB_CONNECTION=sqlite <br/>
+    DB_DATABASE=database/database.sqlite
+    
+   **-For using MySQL: (Replacing)** <br/>
+    DB_CONNECTION=mysql <br/>
+    DB_DATABASE=movie_app
+
+   **-Add API Key & URL: (Adding)** <br/>
+    API_KEY=daeab9a1 <br/>
+    API_URL=http://www.omdbapi.com/
+
+7. Run migrations: <br/>
+`php artisan migrate`
+
+8. Insert initial data: <br/>
+`php artisan db:seed`
+
+9. Start development server: <br/>
+`php artisan serve`
 
 ---
 
