@@ -63,6 +63,7 @@ Coming Soon
 | POST | /add-movie | Add movie to watchlist |
 | PUT | /update-movie/{id} | Update rating/note |
 | DELETE | /delete-movie/{id} | Remove from watchlist |
+| POST | /upload-poster | Upload posters for adding movies |
 | GET | /searchMovie | Search for a movie |
 
 ### Tech Stack
@@ -100,44 +101,38 @@ Coming Soon
 
 1. Pull the project from Repo  
 
-2. Enter project directory:
+2. Enter project directory: <br/>
 `cd Web 2/A2/laravel`
 
-4. Install dependencies:
+4. Install dependencies: <br/>
 `composer install`
 
-5. Copy environment file:  
+5. Copy environment file: <br/>
 `cp .env.example .env`
 
-6. Generate application key:
+6. Generate application key: <br/>
 `php artisan key:generate`
 
-8. Edit .env:
-
-    **For using SQLite:**
-    
-    DB_CONNECTION=sqlite
+8. Edit your .env file: <br/>
+   **-For using SQLite: (Replacing)** <br/> 
+    DB_CONNECTION=sqlite <br/>
     DB_DATABASE=database/database.sqlite
     
-    <br/>
-    **For using MySQL:**
-    
-    DB_CONNECTION=mysql
+   **-For using MySQL: (Replacing)** <br/>
+    DB_CONNECTION=mysql <br/>
     DB_DATABASE=movie_app
-    
-    <br/>
-    **Add API Key & URL:**
-    
-    API_KEY=daeab9a1<br/>
+
+   **-Add API Key & URL: (Adding)** <br/>
+    API_KEY=daeab9a1 <br/>
     API_URL=http://www.omdbapi.com/
 
-7. Run migrations:  
+7. Run migrations: <br/>
 `php artisan migrate`
 
-8. Insert initial data:  
+8. Insert initial data: <br/>
 `php artisan db:seed`
 
-9. Start development server:
+9. Start development server: <br/>
 `php artisan serve`
 
 ---
