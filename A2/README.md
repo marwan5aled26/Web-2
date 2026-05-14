@@ -114,24 +114,21 @@ Coming Soon
 
 8. Edit .env:
 
-    For using SQLite:
+    **For using SQLite:**
     
     DB_CONNECTION=sqlite
-    
     DB_DATABASE=database/database.sqlite
     
     <br/>
-    For using MySQL:
+    **For using MySQL:**
     
     DB_CONNECTION=mysql
-    
     DB_DATABASE=movie_app
     
     <br/>
-    Add API Key & URL:
+    **Add API Key & URL:**
     
     API_KEY=daeab9a1
-
     API_URL=http://www.omdbapi.com/
 
 7. Run migrations:  
