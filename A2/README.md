@@ -116,7 +116,7 @@ Coming Soon
      DB_CONNECTION=sqlite
      
      DB_DATABASE=database/database.sqlite
-   
+
      
      **Add API Key & URL:**
      
