@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\MovieController;
 
 Route::get('/resources/css/{filename}', function ($filename) {
