@@ -1,4 +1,4 @@
-# 🎬 MovieTracker
+# 🎬 MovieTracker - Vanilla PHP Edition
 
 **A Web-Based Movie Watchlist Manager**  
 
