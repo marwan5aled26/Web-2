@@ -6,7 +6,7 @@ use Tests\TestCase;
 use App\Models\Movie;
 use Illuminate\Foundation\Testing\RefreshDatabase;
  
-class MovieTest extends TestCase
+class ExampleTest extends TestCase
 {
     use RefreshDatabase;
  
@@ -110,3 +110,4 @@ class MovieTest extends TestCase
             'note'   => 'New note after update',
         ]);
     }
+}

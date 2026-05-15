@@ -102,7 +102,7 @@ Coming Soon
 1. Pull the project from Repo  
 
 2. Enter project directory: <br/>
-`cd Web 2/A2/laravel`
+`cd Web-2/A2/laravel`
 
 4. Install dependencies: <br/>
 `composer install`
