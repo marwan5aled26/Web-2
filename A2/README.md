@@ -1,4 +1,4 @@
-# 🎬 MovieTracker - Laravel Edition
+# 🎬 MovieTracker - Laravel PHP Edition
 
 **A Web-Based Movie Watchlist Manager Built with Laravel**
 
