@@ -41,7 +41,7 @@ A2: Coming Soon
 | Assignment | Technology | Description |
 |------------|------------|-------------|
 | A1 | Vanilla PHP + MySQL | Procedural movie tracker with OMDb API |
-| A2 | Laravel + SQLite | MVC migration with automated tests |
+| A2 | Laravel PHP + SQLite | MVC migration with automated tests |
 
 ---
 
