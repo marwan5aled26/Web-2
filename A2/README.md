@@ -97,42 +97,33 @@ Coming Soon
 
 ### Installation Steps
 
-**Use Terminal in VS Code**
+### **Use Terminal in VS Code**
 
-1. Pull the project from Repo  
+1. ***Pull the project from Repo***
 
-2. Enter project directory: <br/>
+2. ***Enter project directory:***<br/>
 `cd Web-2/A2/laravel`
 
-4. Install dependencies: <br/>
+4. ***Install dependencies:***<br/>
 `composer install`
 
-5. Copy environment file: <br/>
+5. ***Copy environment file:***<br/>
 `cp .env.example .env`
 
-6. Generate application key: <br/>
+6. ***Generate application key:***<br/>
 `php artisan key:generate`
 
-8. Edit your .env file: <br/>
-   **-For using SQLite: (Replacing)** <br/> 
-    DB_CONNECTION=sqlite <br/>
-    DB_DATABASE=database/database.sqlite
-    
-   **-For using MySQL: (Replacing)** <br/>
-    DB_CONNECTION=mysql <br/>
-    DB_DATABASE=movie_app
-
-   **-Add API Key & URL: (Adding)** <br/>
-    API_KEY=daeab9a1 <br/>
-    API_URL=http://www.omdbapi.com/
-
-7. Run migrations: <br/>
+7. ***Run migrations:***<br/>
 `php artisan migrate`
 
-8. Insert initial data: <br/>
+8. ***Edit .env file to: (For using SQLite instead of MySQL)***<br/>
+    DB_CONNECTION=sqlite<br/>
+    DB_DATABASE=database/database.sqlite
+
+9. ***Insert initial data:***<br/>
 `php artisan db:seed`
 
-9. Start development server: <br/>
+10. ***Start development server:***<br/>
 `php artisan serve`
 
 ---
