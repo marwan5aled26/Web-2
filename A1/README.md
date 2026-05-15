@@ -69,7 +69,7 @@
 2. Copy folder to `htdocs/`
 3. Start Apache & MySQL
 4. Import `movie_app.sql` to phpMyAdmin
-5. Open `http://localhost/your-folder`
+5. Open `http://localhost/Web-2/A1`
 
 ---
 
