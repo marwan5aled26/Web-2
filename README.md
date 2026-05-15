@@ -49,7 +49,7 @@ A2: Coming Soon
 
 Assignment-1    ->    # Vanilla PHP version
 
-Assignment-2    ->    # Laravel version
+Assignment-2    ->    # Laravel PHP version
 
 ---
 
