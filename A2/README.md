@@ -116,9 +116,9 @@ Coming Soon
 7. ***Run migrations:***<br/>
 `php artisan migrate`
 
-8. ***Edit .env file to: (For using SQLite instead of MySQL)***<br/>
-    DB_CONNECTION=sqlite<br/>
-    DB_DATABASE=database/database.sqlite
+8. ***Edit .env file to: (For using MySQL instead of SQLite)***<br/>
+    DB_CONNECTION=mysql<br/>
+    DB_DATABASE=movie_app
 
 9. ***Insert initial data:***<br/>
 `php artisan db:seed`
