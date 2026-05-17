@@ -37,7 +37,7 @@ function callAPI($method, $url, $data = false)
 }
 
 
-class MovieController extends Controller
+class MovieController
 {
     public function index()
     {
@@ -103,7 +103,7 @@ class MovieController extends Controller
         $result = callAPI('GET', $url);
         $data = json_decode($result, true);
         
-         if ($data['Response'] === 'True') {
+        if ($data['Response'] === 'True') {
             $movies = [];
 
             foreach ($data['Search'] as $movie) {
