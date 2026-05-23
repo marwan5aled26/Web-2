@@ -112,20 +112,20 @@ Coming Soon
 
 6. ***Generate application key:***<br/>
 `php artisan key:generate`
-
+   
 7. ***Run migrations:***<br/>
 `php artisan migrate`
 
-8. ***Edit .env file to: (For using MySQL instead of SQLite)***<br/>
-    DB_CONNECTION=mysql<br/>
-    DB_DATABASE=movie_app
-
-9. ***Insert initial data:***<br/>
+8. ***Insert initial data:***<br/>
 `php artisan db:seed`
 
-10. ***Start development server:***<br/>
+9. ***Start development server:***<br/>
 `php artisan serve`
 
+10. ***Edit .env file to: (For using MySQL instead of SQLite)***<br/>
+    DB_CONNECTION=mysql<br/>
+    DB_DATABASE=movie_app
+   
 ---
 
 ## 🧪 Running Tests
